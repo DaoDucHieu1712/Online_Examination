@@ -68,5 +68,4 @@ public class AccountDAO extends DBContext implements IAccount {
         }
         return null;
     }
-
 }

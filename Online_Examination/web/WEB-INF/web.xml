@@ -8,6 +8,10 @@
         <servlet-name>logoutController</servlet-name>
         <servlet-class>controller.auth.logoutController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>registerController</servlet-name>
+        <servlet-class>controller.auth.registerController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>loginController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>logoutController</servlet-name>
         <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>registerController</servlet-name>
+        <url-pattern>/register</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

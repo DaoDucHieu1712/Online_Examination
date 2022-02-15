@@ -120,4 +120,9 @@ public class Account {
         this.features = features;
     }
 
+    @Override
+    public String toString() {
+        return "Account{" + "id=" + id + ", full_name=" + full_name + ", gender=" + gender + ", dob=" + dob + ", phone=" + phone + ", address=" + address + ", email=" + email + ", password=" + password + ", group=" + group.getId() + ", features=" + features + '}';
+    }
+
 }
