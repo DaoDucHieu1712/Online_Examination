@@ -17,7 +17,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <div class="container-fluid mt-3">
+        <div class="container-fluid mt-3" style="margin: 0;">
             <footer class="text-center text-white" style="background-color: #f1f1f1;">
                 <!-- Grid container -->
                 <div class="container pt-4">
