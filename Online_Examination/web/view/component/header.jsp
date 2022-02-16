@@ -39,12 +39,12 @@
                         </li>
                     </ul>
                     <c:if test="${account == null}">
-                        <a href="view/auth/login.jsp" class="btn btn-outline-success">Đăng nhập</a>
+                        <a href="login" class="btn btn-outline-success">Đăng nhập</a>
                     </c:if>
                     <c:if test="${account != null}">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-outline-danger">Welcome ${sessionScope.account.full_name}</button>
-                        <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button type="button" class="btn btn-outline-success">Welcome ${sessionScope.account.full_name}</button>
+                        <button type="button" class="btn btn-success dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <div class="dropdown-menu" style="background-color: darkslategray">
