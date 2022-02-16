@@ -19,4 +19,11 @@ public interface IAccount {
      * @return account 
      */
     public Account getAccount(String email, String password);
+    
+    /**
+     * Describe the function: user login 
+     * @param a
+     * --> insert User 
+     */
+    public void register(Account a);
 }

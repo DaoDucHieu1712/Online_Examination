@@ -5,12 +5,16 @@
  */
 package controller.auth;
 
+import dao.IAccount;
+import dao.impl.AccountDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Account;
 
 /**
  *
@@ -56,7 +60,7 @@ public class registerController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        request.getRequestDispatcher("view/auth/register.jsp").forward(request, response);
     }
 
     /**
@@ -70,7 +74,19 @@ public class registerController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        Account a = new Account();
+        a.setFull_name(request.getParameter("full_name"));
+        a.setGender(request.getParameter("gender").equals("male"));
+        a.setDob(Date.valueOf(request.getParameter("dob")));
+        a.setPhone(request.getParameter("phone"));
+        a.setAddress(request.getParameter("address"));
+        a.setEmail(request.getParameter("email"));
+        a.setPassword(request.getParameter("password"));
+        
+        IAccount account_dao = new AccountDAO();
+        account_dao.register(a);
+        response.sendRedirect("login");
+        
     }
 
     /**

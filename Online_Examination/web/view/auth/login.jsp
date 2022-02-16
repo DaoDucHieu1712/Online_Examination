@@ -16,7 +16,7 @@
     <body>
         <div class="signup">
             <h2 class="signup__heading">Login</h2>
-            <p class="signup__already">Bạn đã có tài khoản chưa? <a href="#">Đăng ký</a></p>
+            <p class="signup__already">Bạn đã có tài khoản chưa? <a href="register">Đăng ký</a></p>
             <p style="color: red; margin: 15px 0;">${notify}</p>
             <form action="login" method="POST" class="signup_form">
                 <div class="form__group">

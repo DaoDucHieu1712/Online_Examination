@@ -68,4 +68,69 @@ public class AccountDAO extends DBContext implements IAccount {
         }
         return null;
     }
+
+    @Override
+    public void register(Account a) {
+        try {
+            connection.setAutoCommit(false);
+            String sql = "INSERT INTO [Account]\n"
+                    + "           ([full_name]\n"
+                    + "           ,[gender]\n"
+                    + "           ,[dob]\n"
+                    + "           ,[phone]\n"
+                    + "           ,[address]\n"
+                    + "           ,[email]\n"
+                    + "           ,[password])\n"
+                    + "     VALUES\n"
+                    + "           (?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?\n"
+                    + "           ,?)";
+
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, a.getFull_name());
+            stm.setBoolean(2, a.isGender());
+            stm.setDate(3, a.getDob());
+            stm.setString(4, a.getPhone());
+            stm.setString(5, a.getAddress());
+            stm.setString(6, a.getEmail());
+            stm.setString(7, a.getPassword());
+            stm.executeUpdate();
+            // Query account to get identity number for account_id
+            String sql_getId = "Select @@IDENTITY AS account_id";// lay id cua cau lenh sql vua insert
+            PreparedStatement stm_getId = connection.prepareStatement(sql_getId);
+            ResultSet rs = stm_getId.executeQuery();
+            if (rs.next()) {
+                a.setId(rs.getInt("account_id"));
+            }
+            // insert Group_Account
+            String sql_insert_GroupAccount = "INSERT INTO [Group_Account]\n"
+                    + "           ([account_id]\n"
+                    + "           ,[group_id])\n"
+                    + "     VALUES\n"
+                    + "           (?\n"
+                    + "           ,2)";
+            PreparedStatement stm_insert_GroupAccount = connection.prepareStatement(sql_insert_GroupAccount);
+            stm_insert_GroupAccount.setInt(1, a.getId());
+            stm_insert_GroupAccount.executeUpdate();
+
+            connection.commit();
+
+        } catch (SQLException ex) {
+            try {
+                connection.rollback();
+            } catch (SQLException ex1) {
+                Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        } finally {
+            try {
+                connection.setAutoCommit(true);
+            } catch (SQLException ex) {
+                Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
 }
