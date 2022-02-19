@@ -88,7 +88,7 @@ public class loginController extends HttpServlet {
                 response.sendRedirect("view/auth/admin-page.jsp");
             } else {
                 session.setAttribute("account", account);
-                response.sendRedirect("home.jsp");
+                response.sendRedirect("view/public/home.jsp");
             }
         }
     }
