@@ -39,7 +39,7 @@
                         </li>
                     </ul>
                     <c:if test="${account == null}">
-                        <a href="login" class="btn btn-outline-success">Đăng nhập</a>
+                        <a href="../login" class="btn btn-outline-success">Đăng nhập</a>
                     </c:if>
                     <c:if test="${account != null}">
                         <div class="btn-group">
@@ -51,7 +51,7 @@
                             <a class="dropdown-item" style="color: whitesmoke" href="#info">Thông tin cá nhân</a>
                             <a class="dropdown-item" style="color: whitesmoke" href="#updateAuth">Đổi mật khẩu</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" style="color: whitesmoke" href="logout">Đăng xuất</a>
+                            <a class="dropdown-item" style="color: whitesmoke" href="../logout">Đăng xuất</a>
                         </div>
                     </div>
                 </c:if>

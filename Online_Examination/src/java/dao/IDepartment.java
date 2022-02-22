@@ -12,9 +12,5 @@ import model.Course;
  *
  * @author ADMIN
  */
-public interface ICourse {
-
-    public ArrayList<Course> list_course();
-    public Course getCourse(int id);
-
+public interface IDepartment {
 }

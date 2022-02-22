@@ -10,5 +10,12 @@ package model;
  * @author ADMIN
  */
 public class Question {
-    
+    private int id;
+    private String quiz;
+    private String op1;
+    private String op2;
+    private String op3;
+    private String op4;
+    private int solution;
+    private Course course;
 }

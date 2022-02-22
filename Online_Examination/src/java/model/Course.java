@@ -57,5 +57,4 @@ public class Course {
         this.department = department;
     }
     
-    
 }
