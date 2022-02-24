@@ -59,24 +59,80 @@ public class CourseDAO extends DBContext implements ICourse {
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, id);
             ResultSet rs = stm.executeQuery();
-            
-            while (rs.next()) {                
+
+            while (rs.next()) {
                 Course c = new Course();
                 c.setId(rs.getInt("id"));
                 c.setName(rs.getString("name"));
-                c.setDisplay_name("display_name");
+                c.setDisplay_name(rs.getString("display_name"));
                 Department d = new Department();
                 d.setId(rs.getInt("did"));
                 d.setName(rs.getString("dname"));
                 c.setDepartment(d);
                 return c;
             }
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(CourseDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
 
+    }
+
+    @Override
+    public void insert(Course course) {
+        try {
+            String sql = "INSERT INTO [Course]\n"
+                    + "           ([name]\n"
+                    + "           ,[display_name]\n"
+                    + "           ,[department_id])\n"
+                    + "     VALUES\n"
+                    + "           (?\n"
+                    + "           ,?\n"
+                    + "           ,?)";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, course.getName());
+            stm.setString(2, course.getDisplay_name());
+            stm.setInt(3, course.getDepartment().getId());
+            stm.executeUpdate();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CourseDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    @Override
+    public void update(Course course) {
+        try {
+            String sql = "UPDATE [Course]\n"
+                    + "   SET [name] = ?\n"
+                    + "      ,[display_name] = ?\n"
+                    + "      ,[department_id] = ?\n"
+                    + " WHERE id = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, course.getName());
+            stm.setString(2, course.getDisplay_name());
+            stm.setInt(3, course.getDepartment().getId());
+            stm.setInt(4, course.getId());
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CourseDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public void delete(int id) {
+        try {
+            String sql = "DELETE FROM [Course]\n"
+                    + "      WHERE id = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CourseDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
 }

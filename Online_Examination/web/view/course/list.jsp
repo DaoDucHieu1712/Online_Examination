@@ -51,7 +51,7 @@
         <!--Table-->
         <div class="row m-3">
             <div class="col-3 sidebar">
-                <a class="btn btn-info" href="insertCourses">Insert Course</a>
+                <a class="btn btn-info" href="insert">Insert Course</a>
             </div>
             <div class="col-9"> 
                 <table class="table table-success table-striped">

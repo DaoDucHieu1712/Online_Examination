@@ -6,11 +6,13 @@
 package dao;
 
 import java.util.ArrayList;
-import model.Course;
+import model.Department;
 
 /**
  *
  * @author ADMIN
  */
 public interface IDepartment {
+    
+    public ArrayList<Department> getAllDepartment();
 }

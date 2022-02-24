@@ -16,5 +16,8 @@ public interface ICourse {
 
     public ArrayList<Course> list_course();
     public Course getCourse(int id);
-
+    public void insert(Course course);
+    public void update(Course course);
+    public void delete(int id);
+    
 }
