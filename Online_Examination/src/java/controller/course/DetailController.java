@@ -5,6 +5,7 @@
  */
 package controller.course;
 
+import controller.auth.BaseRequireAuthentication;
 import dao.ICourse;
 import dao.impl.CourseDAO;
 import java.io.IOException;
@@ -18,7 +19,7 @@ import model.Course;
  *
  * @author ADMIN
  */
-public class DetailController extends HttpServlet {
+public class DetailController extends BaseRequireAuthentication {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,6 +30,7 @@ public class DetailController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    @Override
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
@@ -48,7 +50,7 @@ public class DetailController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -62,7 +64,7 @@ public class DetailController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }

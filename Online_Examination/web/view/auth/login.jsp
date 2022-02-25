@@ -10,33 +10,49 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
         <link rel="stylesheet" href="././css/login.css">
     </head>
     <body>
         <div class="signup">
-            <h2 class="signup__heading">Login</h2>
-            <p class="signup__already">Bạn đã có tài khoản chưa? <a href="register">Đăng ký</a></p>
-            <p style="color: red; margin: 15px 0;">${notify}</p>
-            <form action="login" method="POST" class="signup_form">
-                <div class="form__group">
-                    <input type="email" name="email" class="form__input" placeholder="Nhập email ...">
+            <div class="signup-content">
+                <h1 class="signup__heading">Sign up</h1>
+                <h2 class="signup__caption">sign up with</h2>
+                <div class="signup-socail">
+                    <div class="signup-socail__items">
+                        <i class="fab fa-google signup-socail__icons"></i>
+                        <span>signup with Google</span>
+                    </div>
+                    <div class="signup-socail__items">
+                        <i class="fab fa-facebook signup-socail__icons"></i>
+                        <span>signup with Facebook</span>
+                    </div>
                 </div>
-                <div class="form__group">
-                    <input type="password" name="password" class="form__input" placeholder="Nhập mật khẩu ...">
+                <p style="color: red; margin: 15px 10px;">${notify}</p>
+                <div class="signup-form">
+                    <form action="login" method="POST">
+                        <div class="signup-form__group">
+                            <label for="name" class="signup-form__lable">Email</label>
+                            <input type="email" name="email" id="name" class="signup-form__input" placeholder="Enter email ...">
+                        </div>
+                        <div class="signup-form__group">
+                            <label for="pw" class="signup-form__lable">Password</label>
+                            <input type="password" name="password" id="pw" class="signup-form__input" placeholder="Enter password ...">
+                        </div>
+                        <div class="signup-form__group">
+                            <input type="checkbox" name="remember" value="true" id="signup-form__checkbox" class="signup-form__checkbox">
+                            <label for="signup-form__checkbox" class="signup-form__term">remember me</label>
+                        </div>
+                        <button type="submit" class="signup-form__submit"><i class="fa-solid fa-arrow-right"></i></button>
+                        <p class="signup-form__span">Don't have an account <a href="register">Register</a></p>
+                    </form>
                 </div>
-                <div class="form__group">
-                    <button type="submit" class="form__submit">
-                        Đăng nhập <i class="fa fa-long-arow-right"></i>
-                    </button>
-                </div>
-            </form>
-            <div class="form__tos">
-                <input type="checkbox" id="tos">
-                <label for="tos">Bạn đồng ý những với những <a href="#" class="signup_tos">điều khoản</a></label>
+            </div>
+            <div class="signup-img">
+                <img src="././image/course-1-3.png" class="signup-img__image" alt="hinhAnh">
             </div>
         </div>
+
     </body>
 </html>

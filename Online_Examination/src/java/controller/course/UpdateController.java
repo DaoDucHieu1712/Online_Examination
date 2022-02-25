@@ -5,6 +5,7 @@
  */
 package controller.course;
 
+import controller.auth.BaseRequireAuthentication;
 import dao.ICourse;
 import dao.IDepartment;
 import dao.impl.CourseDAO;
@@ -23,7 +24,7 @@ import model.Department;
  *
  * @author ADMIN
  */
-public class UpdateController extends HttpServlet {
+public class UpdateController extends BaseRequireAuthentication {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -61,7 +62,7 @@ public class UpdateController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
         ICourse course_dao = new CourseDAO();
@@ -82,7 +83,7 @@ public class UpdateController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Course c = new Course();
         c.setId(Integer.parseInt(request.getParameter("id")));
