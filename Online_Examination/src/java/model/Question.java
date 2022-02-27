@@ -18,4 +18,97 @@ public class Question {
     private String op4;
     private int solution;
     private Course course;
+
+    public Question() {
+    }
+
+    public Question(int id, String quiz, String op1, String op2, String op3, String op4, int solution, Course course) {
+        this.id = id;
+        this.quiz = quiz;
+        this.op1 = op1;
+        this.op2 = op2;
+        this.op3 = op3;
+        this.op4 = op4;
+        this.solution = solution;
+        this.course = course;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getQuiz() {
+        return quiz;
+    }
+
+    public void setQuiz(String quiz) {
+        this.quiz = quiz;
+    }
+
+    public String getOp1() {
+        return op1;
+    }
+
+    public void setOp1(String op1) {
+        this.op1 = op1;
+    }
+
+    public String getOp2() {
+        return op2;
+    }
+
+    public void setOp2(String op2) {
+        this.op2 = op2;
+    }
+
+    public String getOp3() {
+        return op3;
+    }
+
+    public void setOp3(String op3) {
+        this.op3 = op3;
+    }
+
+    public String getOp4() {
+        return op4;
+    }
+
+    public void setOp4(String op4) {
+        this.op4 = op4;
+    }
+
+    public int getSolution() {
+        return solution;
+    }
+
+    public void setSolution(int solution) {
+        this.solution = solution;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+    
+    public String getSolutionIsStr(int solution){
+        switch(solution){
+            case 1:
+                return op1;
+            case 2:
+                return op2;
+            case 3:
+                return op3;
+            case 4:
+                return op4;
+        }
+        return null;
+    }
+    
 }

@@ -10,6 +10,7 @@ import dao.IAccount;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Account;
@@ -131,6 +132,96 @@ public class AccountDAO extends DBContext implements IAccount {
             } catch (SQLException ex) {
                 Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+    }
+
+    @Override
+    public ArrayList<Account> getAllAccount() {
+        ArrayList<Account> list_account = new ArrayList<>();
+        try {
+            String sql = "SELECT id, full_name, gender, dob, "
+                    + "phone, address FROM Account";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Account a = new Account();
+                a.setId(rs.getInt("id"));
+                a.setFull_name(rs.getString("full_name"));
+                a.setGender(rs.getBoolean("gender"));
+                a.setDob(rs.getDate("dob"));
+                a.setPhone(rs.getString("phone"));
+                a.setAddress(rs.getString("address"));
+                list_account.add(a);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list_account;
+    }
+
+    @Override
+    public Account detail(int id) {
+        try {
+            String sql = "SELECT id, full_name, gender, dob, phone, address \n"
+                    + "FROM Account where id = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            ResultSet rs = stm.executeQuery();
+
+            if (rs.next()) {
+                Account a = new Account();
+                a.setId(rs.getInt("id"));
+                a.setFull_name(rs.getString("full_name"));
+                a.setGender(rs.getBoolean("gender"));
+                a.setDob(rs.getDate("dob"));
+                a.setPhone(rs.getString("phone"));
+                a.setAddress(rs.getString("address"));
+                return a;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    @Override
+    public void delete(int id) {
+        try {
+            String sql = "DELETE FROM [Account]\n"
+                    + "      WHERE id = ?";
+            PreparedStatement stm = connection.prepareCall(sql);
+            stm.setInt(1, id);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @Override
+    public void update(Account account) {
+        try {
+            String sql = "UPDATE [Account]\n"
+                    + "   SET [full_name] = ?\n"
+                    + "      ,[gender] = ?\n"
+                    + "      ,[dob] = ?\n"
+                    + "      ,[phone] = ?\n"
+                    + "      ,[address] = ?\n"
+                    + "      ,[email] = ?\n"
+                    + "      ,[password] = ?\n"
+                    + " WHERE id = ?";
+            
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, account.getFull_name());
+            stm.setBoolean(2, account.isGender());
+            stm.setDate(3, account.getDob());
+            stm.setString(4, account.getPhone());
+            stm.setString(5, account.getAddress());
+            stm.setString(6, account.getEmail());
+            stm.setString(7, account.getPhone());
+            stm.setInt(8, account.getId());
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

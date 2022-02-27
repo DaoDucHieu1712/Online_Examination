@@ -8,13 +8,147 @@ and open the template in the editor.
     Author     : ADMIN
 */
 
-.sidebar{
-    background-color: greenyellow;
-    width: 350px;
-    height: 100vh;
+button,
+input,
+textarea,
+select {
+    font-family: "Poppins", sans-serif;
 }
 
-.sidebar a{
-    text-align: center;
-    margin-top: 15px;
+.section {
+    margin: 150px auto;
+    width: 1000px;
+    height: 600px;
+    background-color: white;
+    box-shadow: 0 0 3px 6px rgba(0, 0, 0, 0.151);
+    transform: translateX(100px);
+    border-radius: 2rem;
+    padding: 50px;
 }
+.section__icon {
+    margin: 0 3px;
+}
+.section__insert {
+    display: inline-block;
+    margin-top: 35px;
+    font-size: 1.3rem;
+}
+.section__insert a {
+    font-size: 1.5rem;
+    color: #0eb582;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.section__search {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 40px;
+}
+.section__input {
+    outline: none;
+    border: none;
+    background-color: rgba(153, 153, 153, 0.178);
+    padding: 10px;
+    margin-right: 5px;
+    border-radius: 1rem;
+    border: 2px solid #999;
+}
+.section__input:focus {
+    border-color: #0eb582;
+    box-shadow: 0 0 3px 3px rgba(14, 181, 130, 0.3);
+}
+.section__submit {
+    font-weight: bold;
+    color: white;
+    border: none;
+    outline: none;
+    background-color: rgba(14, 181, 130, 0.9);
+    padding: 10px;
+    border-radius: 1rem;
+    border: 2px solid #0eb582;
+    box-shadow: 2px 2px 0 0 rgba(0, 0, 0, 0.767);
+}
+.section__submit:active {
+    box-shadow: 1px 1px 0 0 rgba(0, 0, 0, 0.767);
+    transform: translateY(3px);
+}
+.section__table table {
+    margin: 35px 0 35px 0;
+    width: 100%;
+    border-collapse: collapse;
+}
+.section__table table thead {
+    text-transform: uppercase;
+    font-size: 1.4rem;
+}
+.section__table table thead tr {
+    color: white;
+    background-color: #0eb582;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+}
+.section__table table thead tr th {
+    text-align: center;
+    padding: 15px;
+}
+.section__table table thead tr th:first-child {
+    border-top-left-radius: 1.5rem;
+}
+.section__table table thead tr th:last-child {
+    border-top-right-radius: 1.5rem;
+}
+.section__table table tbody {
+    font-size: 1.3rem;
+}
+.section__table table tbody tr:nth-child(even) {
+    background-color: rgba(204, 204, 204, 0.295);
+}
+.section__table table tbody tr:last-child {
+    border-bottom: 4px solid #0eb582;
+}
+.section__table table tbody td {
+    text-align: center;
+    padding: 15px;
+    border-bottom: 1px solid #999;
+}
+.section__table table tbody td a {
+    color: #555;
+}
+
+.pagger {
+    margin-top: 35px;
+    font-size: 1.6rem;
+    margin-left: 375px;
+    margin-right: auto;
+    padding-bottom: 25px;
+}
+.pagger a {
+    margin-left: 5px;
+    padding: 3px;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    color: #555;
+    transition: 0.25s linear;
+}
+.pagger a:hover {
+    background-color: rgba(14, 181, 130, 0.66);
+    color: white;
+    font-weight: bold;
+    border-color: #0eb582;
+    box-shadow: 0 0 2px 0 #0eb582;
+}
+.pagger span {
+    margin-left: 5px;
+    width: 25px;
+    height: 25px;
+    padding: 3px;
+    border: 1px solid #ccc;
+    color: #555;
+    background-color: rgba(14, 181, 130, 0.66);
+    color: white;
+    font-weight: bold;
+    border-color: #0eb582;
+    box-shadow: 0 0 2px 0 #0eb582;
+}
+
+/*# sourceMappingURL=list-course.css.map */

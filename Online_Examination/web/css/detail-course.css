@@ -1,0 +1,83 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Feb 27, 2022, 11:27:37 AM
+    Author     : ADMIN
+*/
+
+button,
+input,
+textarea,
+select {
+    font-family: "Poppins", sans-serif;
+}
+
+.section {
+    padding: 25px;
+    margin: 150px auto;
+    width: 1000px;
+    height: 600px;
+    background-color: white;
+    box-shadow: 0 0 3px 6px rgba(0, 0, 0, 0.151);
+    transform: translateX(100px);
+    border-radius: 2rem;
+    display: flex;
+}
+.section-form {
+    margin: 35px 0;
+}
+.section__label {
+    display: block;
+}
+.section__input {
+    margin-bottom: 10px;
+    width: 280px;
+    font-size: 1.2rem;
+    display: block;
+    outline: none;
+    padding: 10px;
+    background-color: rgba(153, 153, 153, 0.178);
+    border-radius: 10px;
+    border-color: 2px solid green;
+    box-shadow: 0 0 4px 3px rgba(14, 181, 130, 0.2);
+}
+.section__heading {
+    margin-bottom: 30px;
+    font-size: 2.1rem;
+    color: #0eb582;
+    font-weight: bold;
+    text-transform: uppercase;
+    position: relative;
+}
+.section__heading::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    width: 50px;
+    height: 5px;
+    background-color: #0eb582;
+    border-radius: 3px;
+}
+.section__detail {
+    width: 50%;
+}
+.section__img {
+    width: 50%;
+}
+.section__link {
+    display: inline-block;
+    text-align: center;
+    padding: 15px;
+    background-color: #0eb582;
+    font-size: 1.6rem;
+    color: white;
+    border-radius: 1rem;
+    font-weight: bold;
+    transition: 0.25s linear;
+}
+.section__link:hover {
+    background-color: rgba(14, 181, 130, 0.8);
+}

@@ -14,7 +14,7 @@ import model.Question;
  */
 public interface IQuestion {
 
-    public ArrayList<Question> getListQuestionByPaging(int pageIndex, int PageSize);
+    public ArrayList<Question> getListQuestionByPaging(int pageIndex, int pageSize);
 
     public ArrayList<Question> getListQuestionByCourseAndPaging(int course_id, int pageIndex, int pageSize);
 
@@ -34,5 +34,5 @@ public interface IQuestion {
 
     public void delete(int id);
 
-    public ArrayList<Question> getQuestionRandomAndPagging(int quantity);
+    public ArrayList<Question> getQuestionRandomAndPagging(int quantity, int course_id);
 }

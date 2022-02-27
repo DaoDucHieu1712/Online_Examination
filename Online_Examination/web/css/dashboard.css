@@ -1,0 +1,198 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Feb 26, 2022, 9:18:04 PM
+    Author     : ADMIN
+*/
+
+
+html {
+    font-size: 62.5%;
+    font-family: "Poppins", sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style-type: none;
+    text-decoration: none;
+}
+
+input{
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    letter-spacing: 1px;
+    width: 100%;
+    height: 100vh;
+}
+
+.header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.233);
+    z-index: 2;
+}
+.header__logo {
+    font-size: 2rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: 0.25s linear;
+    color: #0eb582;
+}
+.header__logo:hover {
+    color: #0eb582;
+}
+.header__bar {
+    font-size: 2rem;
+    margin-right: 100px;
+    padding: 10px 11px;
+    background-color: #eee;
+    border-radius: 50%;
+    border: 2px solid #999;
+    transition: 0.45s linear;
+    cursor: pointer;
+}
+.header__bar:hover {
+    transform: rotate(180deg);
+    background-color: rgba(153, 153, 153, 0.562);
+}
+.header__icon {
+    margin-right: 5px;
+}
+.header a {
+    color: black;
+}
+.header__list {
+    display: flex;
+}
+.header__items {
+    margin: 0 15px;
+    font-weight: bold;
+}
+.header__items a {
+    transition: 0.25s linear;
+}
+.header__items a:hover {
+    font-size: 1.7rem;
+    color: #0eb582;
+}
+.header__user {
+    margin-right: 15rem;
+    transition: 0.25s linear;
+}
+.header__user:hover {
+    color: #0eb582;
+}
+.header__account {
+    position: relative;
+}
+.header__dropdown {
+    width: 200px;
+    padding: 5px;
+    border-radius: 5px;
+    position: absolute;
+    top: 45px;
+    left: 0;
+    background-color: rgba(14, 181, 130, 0.7);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.25s linear;
+}
+.header__dropdown i {
+    margin-right: 11px;
+}
+.header__dropdown.droppdown-ishow {
+    opacity: 1;
+    visibility: visible;
+}
+.header__dropdown a {
+    color: white;
+}
+.header__dropdown-items:not(:last-child) {
+    padding: 10px;
+    font-size: 1.4rem;
+    transition: 0.25s linear;
+}
+.header__dropdown-items:not(:last-child):hover {
+    background-color: rgba(14, 181, 130, 0.9);
+}
+
+.sidebar {
+    position: fixed;
+    top: 85px;
+    left: 0;
+    background-color: white;
+    height: 100vh;
+    width: 250px;
+    overflow-y: scroll;
+    z-index: 1;
+}
+/*.sidebar::-webkit-scrollbar {
+    width: 10px;
+}
+.sidebar::-webkit-scrollbar-thumb {
+    background-color: #0eb582;
+}
+.sidebar::-webkit-scrollbar-track {
+    background-color: #eee;
+}*/
+.sidebar__heading {
+    color: #0eb582;
+    font-size: 2.1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 50px 0px 50px 10px;
+    position: relative;
+}
+.sidebar__heading::before {
+    content: "";
+    position: absolute;
+    width: 50px;
+    height: 5px;
+    background-color: #0eb582;
+    bottom: 0;
+    border-radius: 3px;
+}
+.sidebar__items {
+    font-weight: bold;
+    font-size: 1.6rem;
+    margin-bottom: 25px;
+    text-align: center;
+    transition: 0.25s linear;
+}
+.sidebar__items:hover {
+    margin-left: 25px;
+}
+.sidebar__items a {
+    color: #555;
+}
+.sidebar__items i {
+    margin-left: 7px;
+    color: #0eb582;
+}
+
+/* .section {
+  margin: 150px auto;
+  width: 1000px;
+  height: 600px;
+  background-color: white;
+  box-shadow: 0 0 3px 6px rgba(0, 0, 0, 0.151);
+  transform: translateX(100px);
+  border-radius: 2rem;
+} */
+
+/*# sourceMappingURL=dashboard.css.map */

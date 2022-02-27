@@ -5,6 +5,7 @@
  */
 package dao;
 
+import java.util.ArrayList;
 import model.Account;
 
 /**
@@ -26,4 +27,13 @@ public interface IAccount {
      * --> insert User 
      */
     public void register(Account a);
+    
+    public ArrayList<Account> getAllAccount();
+    
+    public Account detail(int id);
+    
+    public void delete(int id);
+    
+    public void update(Account account);
+    
 }

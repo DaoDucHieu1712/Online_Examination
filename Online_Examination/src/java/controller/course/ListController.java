@@ -7,15 +7,16 @@ package controller.course;
 
 import controller.auth.BaseRequireAuthentication;
 import dao.ICourse;
+import dao.IDepartment;
 import dao.impl.CourseDAO;
+import dao.impl.DepartmentDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Course;
+import model.Department;
 
 /**
  *
@@ -35,8 +36,11 @@ public class ListController extends BaseRequireAuthentication {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ICourse course_dao = new CourseDAO();
+        IDepartment department_dao = new DepartmentDAO();
+        ArrayList<Department> list_department = department_dao.getAllDepartment();
         ArrayList<Course> list_course = course_dao.list_course();
         request.setAttribute("list_course", list_course);
+        request.setAttribute("list_department", list_department);
         request.getRequestDispatcher("../view/course/list.jsp").forward(request, response);
     }
 
