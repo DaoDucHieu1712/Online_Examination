@@ -1,6 +1,6 @@
 <%-- 
-    Document   : list
-    Created on : Feb 22, 2022, 10:20:36 PM
+    Document   : department
+    Created on : Feb 28, 2022, 8:45:30 PM
     Author     : ADMIN
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -8,9 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -369,10 +367,10 @@
                 <c:if test="${sessionScope.account eq null}">
                     <a href="#account" onclick="show_dropdown()" class="header__user"><i
                             class="fa-solid fa-user header__account-icon"></i></a>
-                    </c:if>
-                    <c:if test="${sessionScope.account ne null}">
+                </c:if>
+                <c:if test="${sessionScope.account ne null}">
                     <span class="header__name">${sessionScope.account.full_name} <i onclick="show_dropdown()" class="fa-solid fa-caret-down"></i></span>
-                    </c:if>
+                </c:if>
                 <ul class="header__dropdown">
                     <li class="header__dropdown-items"><a href="#"><i class="fa-solid fa-user-check"></i>infomation</a></li>
                     <li class="header__dropdown-items"><a href="#"><i class="fa-solid fa-lock"></i>change password</a></li>
@@ -392,8 +390,9 @@
 
         <div class="section">
             <div class="section__search">
-                <form action="list" method="GET">
+                <form action="department" method="GET">
                     <input type="text" name="name_search" value="${requestScope.name_search}" class="section__input" placeholder="search ...">
+                    <input type="text" name="did" value="${did}" hidden>
                     <button type="submit" class="section__submit">Search</button>
                 </form>
             </div>
@@ -409,19 +408,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${list_course}" var="c">
-                            <tr>
-                                <td>${c.id}</td>
-                                <td>${c.name}</td>
-                                <td>${c.display_name}</td>
-                                <td>${c.department.name}</td>
-                                <td>
-                                    <a href="detail?id=${c.id}"><i class="fa fa-file section__icon"></i></a>
-                                    <a href="update?id=${c.id}"><i class="fa fa-edit section__icon"></i></a>
-                                    <a onclick="do_delete(${c.id})"><i class="fa fa-trash section__icon"></i></a>
-                                </td>
-                            </tr>
-                        </c:forEach>
+                    <c:forEach items="${list_course}" var="c">
+                        <tr>
+                            <td>${c.id}</td>
+                            <td>${c.name}</td>
+                            <td>${c.display_name}</td>
+                            <td>${c.department.name}</td>
+                            <td>
+                                <a href="detail?id=${c.id}"><i class="fa fa-file section__icon"></i></a>
+                                <a href="update?id=${c.id}"><i class="fa fa-edit section__icon"></i></a>
+                                <a onclick="do_delete(${c.id})"><i class="fa fa-trash section__icon"></i></a>
+                            </td>
+                        </tr>
+                    </c:forEach>
                     </tbody>
                 </table>
                 <span class="section__insert">Click here is <a href="insert">Insert</a></span>

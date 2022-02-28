@@ -65,8 +65,11 @@ public class InsertController extends BaseRequireAuthentication {
     protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         IDepartment department_dao = new DepartmentDAO();
+        ICourse course_dao = new CourseDAO();
         ArrayList<Department> list_department = department_dao.getAllDepartment();
+        ArrayList<Course> list_course = course_dao.list_course();
         request.setAttribute("list_department", list_department);
+        request.setAttribute("list_course", list_course);
         request.getRequestDispatcher("../view/course/insert.jsp").forward(request, response);
     }
 

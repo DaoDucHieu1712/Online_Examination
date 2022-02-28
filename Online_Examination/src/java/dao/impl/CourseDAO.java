@@ -132,7 +132,94 @@ public class CourseDAO extends DBContext implements ICourse {
         } catch (SQLException ex) {
             Logger.getLogger(CourseDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
+    }
+
+    @Override
+    public ArrayList<Course> getListCourseByName(String name_search) {
+        ArrayList<Course> list_course = new ArrayList<>();
+        try {
+            String sql = "SELECT c.id, c.name, c.display_name, d.id as did, d.id as dname \n"
+                    + "FROM Course c inner join Department d\n"
+                    + "ON c.department_id = d.id\n"
+                    + "WHERE display_name LIKE '%' +?+'%'";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, name_search);
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                Course c = new Course();
+                c.setId(rs.getInt("id"));
+                c.setName(rs.getString("name"));
+                c.setDisplay_name(rs.getString("display_name"));
+                Department d = new Department();
+                d.setId(rs.getInt("did"));
+                d.setName(rs.getString("dname"));
+                c.setDepartment(d);
+                list_course.add(c);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CourseDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list_course;
+    }
+
+    @Override
+    public ArrayList<Course> getListCourseByDepartmentId(int id, String name_search) {
+            ArrayList<Course> list_course = new ArrayList<>();
+        try {
+            String sql = "SELECT c.id, c.name, c.display_name, d.id as did, d.id as dname \n"
+                    + "FROM Course c inner join Department d\n"
+                    + "ON c.department_id = d.id\n"
+                    + "WHERE d.id = ? and c.display_name like '%'+?+'%'";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            stm.setString(2, name_search);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {                
+                Course c = new Course();
+                c.setId(rs.getInt("id"));
+                c.setName(rs.getString("name"));
+                c.setDisplay_name(rs.getString("display_name"));
+                Department d = new Department();
+                d.setId(rs.getInt("did"));
+                d.setName(rs.getString("dname"));
+                c.setDepartment(d);
+                list_course.add(c);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CourseDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list_course;
+    }
+
+    @Override
+    public ArrayList<Course> getListCourseByDid(int id) {
+        ArrayList<Course> list_course = new ArrayList<>();
+        try {
+            String sql = "SELECT c.id, c.name, c.display_name, d.id as did, d.id as dname \n"
+                    + "FROM Course c inner join Department d\n"
+                    + "ON c.department_id = d.id\n"
+                    + "WHERE d.id = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Course c = new Course();
+                c.setId(rs.getInt("id"));
+                c.setName(rs.getString("name"));
+                c.setDisplay_name(rs.getString("display_name"));
+                Department d = new Department();
+                d.setId(rs.getInt("did"));
+                d.setName(rs.getString("dname"));
+                c.setDepartment(d);
+                list_course.add(c);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CourseDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list_course;
     }
 
 }

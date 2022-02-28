@@ -69,8 +69,10 @@ public class UpdateController extends BaseRequireAuthentication {
         Course course = course_dao.getCourse(id);
         IDepartment department_dao = new DepartmentDAO();
         ArrayList<Department> list_department = department_dao.getAllDepartment();
+        ArrayList<Course> list_course = course_dao.list_course();
         request.setAttribute("course", course);
         request.setAttribute("list_department", list_department);
+        request.setAttribute("list_course", list_course);
         request.getRequestDispatcher("../view/course/update.jsp").forward(request, response);
     }
 

@@ -11,8 +11,10 @@ import dao.IDepartment;
 import dao.impl.CourseDAO;
 import dao.impl.DepartmentDAO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Course;
@@ -22,7 +24,7 @@ import model.Department;
  *
  * @author ADMIN
  */
-public class ListController extends BaseRequireAuthentication {
+public class DepartmentController extends BaseRequireAuthentication {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,21 +38,25 @@ public class ListController extends BaseRequireAuthentication {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String search = request.getParameter("name_search");
-        ICourse course_dao = new CourseDAO();
+        int dept_id = Integer.parseInt(request.getParameter("did"));
         IDepartment department_dao = new DepartmentDAO();
+        ICourse course_dao = new CourseDAO();
+        ArrayList<Department> list_department = department_dao.getAllDepartment();
+
         if (search == null) {
-            ArrayList<Department> list_department = department_dao.getAllDepartment();
-            ArrayList<Course> list_course = course_dao.list_course();
+            ArrayList<Course> list_course = course_dao.getListCourseByDid(dept_id);
+            request.setAttribute("did", dept_id);
             request.setAttribute("list_course", list_course);
             request.setAttribute("list_department", list_department);
         } else {
-            ArrayList<Department> list_department = department_dao.getAllDepartment();
-            ArrayList<Course> list_course = course_dao.getListCourseByName(search);
+            ArrayList<Course> list_course = course_dao.getListCourseByDepartmentId(dept_id, search);
+            request.setAttribute("did", dept_id);
             request.setAttribute("name_search", search);
             request.setAttribute("list_course", list_course);
             request.setAttribute("list_department", list_department);
         }
-        request.getRequestDispatcher("../view/course/list.jsp").forward(request, response);
+        request.getRequestDispatcher("../view/course/department.jsp").forward(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

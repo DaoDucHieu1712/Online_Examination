@@ -9,8 +9,8 @@ import controller.auth.BaseRequireAuthentication;
 import dao.ICourse;
 import dao.impl.CourseDAO;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Course;
@@ -36,6 +36,8 @@ public class DetailController extends BaseRequireAuthentication {
         int id = Integer.parseInt(request.getParameter("id"));
         ICourse course_dao = new CourseDAO();
         Course course = course_dao.getCourse(id);
+        ArrayList<Course> list_course = course_dao.list_course();
+        request.setAttribute("list_course", list_course);
         request.setAttribute("course", course);
         request.getRequestDispatcher("../view/course/detail.jsp").forward(request, response);
     }

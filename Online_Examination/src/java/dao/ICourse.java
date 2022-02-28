@@ -15,6 +15,9 @@ import model.Course;
 public interface ICourse {
 
     public ArrayList<Course> list_course();
+    public ArrayList<Course> getListCourseByName(String name_search);
+    public ArrayList<Course> getListCourseByDepartmentId(int id, String name_search);
+    public ArrayList<Course> getListCourseByDid(int id);
     public Course getCourse(int id);
     public void insert(Course course);
     public void update(Course course);

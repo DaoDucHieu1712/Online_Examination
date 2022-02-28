@@ -1,3 +1,4 @@
+
 /*
 To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
@@ -141,7 +142,7 @@ body {
     overflow-y: scroll;
     z-index: 1;
 }
-/*.sidebar::-webkit-scrollbar {
+.sidebar::-webkit-scrollbar {
     width: 10px;
 }
 .sidebar::-webkit-scrollbar-thumb {
@@ -149,7 +150,7 @@ body {
 }
 .sidebar::-webkit-scrollbar-track {
     background-color: #eee;
-}*/
+}
 .sidebar__heading {
     color: #0eb582;
     font-size: 2.1rem;

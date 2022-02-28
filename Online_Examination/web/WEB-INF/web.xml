@@ -32,6 +32,10 @@
         <servlet-name>DeleteController</servlet-name>
         <servlet-class>controller.course.DeleteController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DepartmentController</servlet-name>
+        <servlet-class>controller.course.DepartmentController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>loginController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -63,6 +67,10 @@
     <servlet-mapping>
         <servlet-name>DeleteController</servlet-name>
         <url-pattern>/course/delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DepartmentController</servlet-name>
+        <url-pattern>/course/department</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
