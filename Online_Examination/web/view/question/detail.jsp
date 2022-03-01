@@ -1,6 +1,6 @@
 <%-- 
-    Document   : admin-page
-    Created on : Feb 15, 2022, 8:08:10 PM
+    Document   : detail
+    Created on : Mar 1, 2022, 10:34:45 PM
     Author     : ADMIN
 --%>
 

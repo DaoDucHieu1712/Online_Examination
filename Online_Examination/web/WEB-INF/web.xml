@@ -36,6 +36,42 @@
         <servlet-name>DepartmentController</servlet-name>
         <servlet-class>controller.course.DepartmentController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>InfoController</servlet-name>
+        <servlet-class>controller.auth.InfoController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangePasswordController</servlet-name>
+        <servlet-class>controller.auth.ChangePasswordController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DashBoardController</servlet-name>
+        <servlet-class>controller.auth.DashBoardController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListQuestionController</servlet-name>
+        <servlet-class>controller.question.ListQuestionController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DetailQuestionController</servlet-name>
+        <servlet-class>controller.question.DetailQuestionController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateQuestionController</servlet-name>
+        <servlet-class>controller.question.UpdateQuestionController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CourseQuestionController</servlet-name>
+        <servlet-class>controller.question.CourseQuestionController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InsertQuestionController</servlet-name>
+        <servlet-class>controller.question.InsertQuestionController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteQuestionController</servlet-name>
+        <servlet-class>controller.question.DeleteQuestionController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>loginController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -71,6 +107,42 @@
     <servlet-mapping>
         <servlet-name>DepartmentController</servlet-name>
         <url-pattern>/course/department</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InfoController</servlet-name>
+        <url-pattern>/auth/infomation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangePasswordController</servlet-name>
+        <url-pattern>/auth/changepassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DashBoardController</servlet-name>
+        <url-pattern>/auth/dashboard</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListQuestionController</servlet-name>
+        <url-pattern>/question/list</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DetailQuestionController</servlet-name>
+        <url-pattern>/question/detail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateQuestionController</servlet-name>
+        <url-pattern>/question/update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CourseQuestionController</servlet-name>
+        <url-pattern>/question/course</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InsertQuestionController</servlet-name>
+        <url-pattern>/question/insert</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteQuestionController</servlet-name>
+        <url-pattern>/question/delete</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

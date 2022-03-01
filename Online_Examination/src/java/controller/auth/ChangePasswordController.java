@@ -20,7 +20,7 @@ import model.Account;
  *
  * @author ADMIN
  */
-public class loginController extends HttpServlet {
+public class ChangePasswordController extends BaseRequireAuthentication {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +39,10 @@ public class loginController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet loginController</title>");
+            out.println("<title>Servlet ChangePasswordController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet loginController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ChangePasswordController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,9 +58,9 @@ public class loginController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("view/auth/login.jsp").forward(request, response);
+        request.getRequestDispatcher("../view/auth/changePassword.jsp").forward(request, response);
     }
 
     /**
@@ -72,23 +72,33 @@ public class loginController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String email = request.getParameter("email").trim();
-        String password = request.getParameter("password").trim();
-        IAccount iAccount = new AccountDAO();
-        Account account = iAccount.getAccount(email, password);
         HttpSession session = request.getSession();
-        if (account == null) {
-            request.setAttribute("notify", "Email hoặc mật khẩu không đúng !");
-            request.getRequestDispatcher("view/auth/login.jsp").forward(request, response);
+        Account account = (Account) session.getAttribute("account");
+        String email = request.getParameter("email");
+        String old_pw = request.getParameter("old_pw");
+        String new_pw = request.getParameter("new_pw");
+        String cf_pw = request.getParameter("cf_pw");
+        System.out.println("Email :" +email);
+        System.out.println("Email Session :" +account.getEmail());
+        System.out.println("old :" +old_pw);
+        System.out.println("pass Session :" +account.getPassword());
+        System.out.println("new  :" +new_pw);
+        System.out.println("cf :" +cf_pw);
+
+        if (email.equals(account.getEmail())== false || old_pw.equals(account.getPassword())== false) {
+            request.setAttribute("notify", "email or old password not correct !");
+            request.getRequestDispatcher("../view/auth/changePassword.jsp").forward(request, response);
         } else {
-            if (account.getGroup().getId() == 1) {
-                session.setAttribute("account", account);
-                response.sendRedirect("auth/dashboard");
-            } else {
-                session.setAttribute("account", account);
-                response.sendRedirect("auth/dashboard");
+            if (new_pw.equals(cf_pw) == false) {
+                request.setAttribute("notify", "password and confirm password not central");
+                request.getRequestDispatcher("../view/auth/changePassword.jsp").forward(request, response);
+            }else{
+                IAccount account_dao = new AccountDAO();
+                account.setPassword(new_pw);
+                account_dao.update(account);
+                response.sendRedirect("infomation");
             }
         }
     }

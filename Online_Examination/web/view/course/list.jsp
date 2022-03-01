@@ -374,9 +374,9 @@
                     <span class="header__name">${sessionScope.account.full_name} <i onclick="show_dropdown()" class="fa-solid fa-caret-down"></i></span>
                     </c:if>
                 <ul class="header__dropdown">
-                    <li class="header__dropdown-items"><a href="#"><i class="fa-solid fa-user-check"></i>infomation</a></li>
-                    <li class="header__dropdown-items"><a href="#"><i class="fa-solid fa-lock"></i>change password</a></li>
-                    <li class="header__dropdown-items"><a href="#"><i class="fa-solid fa-right-from-bracket"></i>Logout</>
+                    <li class="header__dropdown-items"><a href="../auth/infomation"><i class="fa-solid fa-user-check"></i>infomation</a></li>
+                    <li class="header__dropdown-items"><a href="../auth/changepassword"><i class="fa-solid fa-lock"></i>change password</a></li>
+                    <li class="header__dropdown-items"><a href="../logout"><i class="fa-solid fa-right-from-bracket"></i>Logout</>
                     </li>
                 </ul>
             </div>

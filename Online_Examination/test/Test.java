@@ -15,9 +15,11 @@ import model.Account;
  */
 public class Test {
     public static void main(String[] args) {
-        IAccount iaccount = new AccountDAO();
-        Account a = iaccount.getAccount("duc123@gmail.com", "123456");
-        System.out.println(a.toString());
+       if("123".contains("1234")){
+           System.out.println("Yes");
+       }else{
+           System.out.println("No");
+       }
         
     }
 }
