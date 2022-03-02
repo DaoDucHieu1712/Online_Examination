@@ -272,14 +272,14 @@
         <header class="header">
             <div class="header__dashboard">
                 <i class="fa-solid fa-bars header__bar"></i>
-                <a href="#home" class="header__logo"><i class="fa-solid fa-user-graduate header__icon"></i>Dashboard</a>
+                <a href="../dashboard" class="header__logo"><i class="fa-solid fa-user-graduate header__icon"></i>Dashboard</a>
             </div>
             <ul class="header__list">
                 <li class="header__items"><a href="#">Student</a></li>
                 <li class="header__items"><a href="../course/list">Course</a></li>
-                <li class="header__items"><a href="#">Question</a></li>
-                <li class="header__items"><a href="#">Exam</a></li>
-                <li class="header__items"><a href="#">Feedback</a></li>
+                <li class="header__items"><a href="../question/list">Question</a></li>
+                <li class="header__items"><a href="../exam/list">Exam</a></li>
+                <li class="header__items"><a href="../feedback/list">Feedback</a></li>
             </ul>
             <div class="header__account">
                 <c:if test="${sessionScope.account eq null}">

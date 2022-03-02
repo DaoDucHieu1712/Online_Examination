@@ -15,10 +15,14 @@ import model.Question;
 public interface IQuestion {
 
     public ArrayList<Question> getListQuestionByPaging(int pageIndex, int pageSize);
+    
+    public ArrayList<Question> getListQuestionBySearchName(String name_search, int pageIndex, int pageSize);
 
     public ArrayList<Question> getListQuestionByCourseAndPaging(int course_id, int pageIndex, int pageSize);
 
     public ArrayList<Question> getListQuestionByCourseAndSearchAndPaging(String name_search, int course_id, int pageIndex, int pageSize);
+    
+    public int countQuestionByNameSearch(String name_search);
 
     public int countQuestion();
 

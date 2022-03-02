@@ -5,12 +5,18 @@
  */
 package controller.question;
 
+import dao.ICourse;
+import dao.IQuestion;
+import dao.impl.CourseDAO;
+import dao.impl.QuestionDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Course;
+import model.Question;
 
 /**
  *
@@ -29,19 +35,41 @@ public class CourseQuestionController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet CourseQuestionController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet CourseQuestionController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        ICourse course_dao = new CourseDAO();
+        IQuestion question_dao = new QuestionDAO();
+        String pageId = request.getParameter("pageIndex");
+        int course_id = Integer.parseInt(request.getParameter("cid"));
+        String name_search = request.getParameter("name_search");
+        if (name_search == null) {
+            name_search = "";
         }
+        int pageIndex = 1;
+        try {
+            pageIndex = Integer.parseInt(pageId);
+        } catch (NumberFormatException e) {
+            pageIndex = 1;
+        }
+
+        int pageSize = 6;
+        int totalQuestion;
+        ArrayList<Course> list_course = course_dao.list_course();
+        ArrayList<Question> list_question = new ArrayList<>();
+        if (name_search.length() == 0) {
+            list_question = question_dao.getListQuestionByCourseAndPaging(course_id, pageIndex, pageSize);
+            totalQuestion = question_dao.countQuestionByCourse(course_id);
+        } else {
+            list_question = question_dao.getListQuestionByCourseAndSearchAndPaging(name_search, course_id, pageIndex, pageSize);
+            totalQuestion = question_dao.countQuestionByCourseIdAndSearch(name_search, course_id);
+        }
+        int maxPage = totalQuestion / pageSize + (totalQuestion % pageSize > 0 ? 1 : 0);
+        
+        request.setAttribute("course_id", course_id);
+        request.setAttribute("list_course", list_course);
+        request.setAttribute("list_question", list_question);
+        request.setAttribute("pageIndex", pageIndex);
+        request.setAttribute("maxPage", maxPage);
+        request.setAttribute("name_search", name_search);
+        request.getRequestDispatcher("../view/question/course.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

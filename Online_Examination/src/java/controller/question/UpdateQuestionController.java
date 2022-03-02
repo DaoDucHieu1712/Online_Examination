@@ -5,12 +5,19 @@
  */
 package controller.question;
 
+import dao.ICourse;
+import dao.IQuestion;
+import dao.impl.CourseDAO;
+import dao.impl.QuestionDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Course;
+import model.Question;
 
 /**
  *
@@ -35,7 +42,7 @@ public class UpdateQuestionController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UpdateQuestionController</title>");            
+            out.println("<title>Servlet UpdateQuestionController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet UpdateQuestionController at " + request.getContextPath() + "</h1>");
@@ -56,7 +63,16 @@ public class UpdateQuestionController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        int id = Integer.parseInt(request.getParameter("id"));
+        ICourse course_dao = new CourseDAO();
+        IQuestion question_dao = new QuestionDAO();
+        
+        Question question = question_dao.getQuestion(id);
+        ArrayList<Course> list_course = course_dao.list_course();
+        request.setAttribute("question", question);
+        request.setAttribute("list_course", list_course);
+        request.getRequestDispatcher("../view/question/update.jsp").forward(request, response);
     }
 
     /**
@@ -70,7 +86,20 @@ public class UpdateQuestionController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        IQuestion question_dao = new QuestionDAO();
+        Question q = new Question();
+        q.setId(Integer.parseInt(request.getParameter("id")));
+        q.setQuiz(request.getParameter("quiz"));
+        q.setOp1(request.getParameter("op1"));
+        q.setOp2(request.getParameter("op2"));
+        q.setOp3(request.getParameter("op3"));
+        q.setOp4(request.getParameter("op4"));
+        q.setSolution(Integer.parseInt(request.getParameter("solution")));
+        Course c = new Course();
+        c.setId(Integer.parseInt(request.getParameter("cid")));
+        q.setCourse(c);
+        question_dao.update(q);
+        response.sendRedirect("list");
     }
 
     /**

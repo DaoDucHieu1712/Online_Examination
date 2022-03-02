@@ -33,7 +33,7 @@ public class QuestionDAO extends DBContext implements IQuestion {
                     + "d.id as [did], d.name as [dname]\n"
                     + "FROM Question q INNER JOIN Course c\n"
                     + "ON q.course_id = c.id INNER JOIN Department d\n"
-                    + "ON c.dept_id = d.id) as x\n"
+                    + "ON c.department_id = d.id) as x\n"
                     + "WHERE rn between (?-1)*? + 1 and ?*?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, pageIndex);
@@ -65,8 +65,53 @@ public class QuestionDAO extends DBContext implements IQuestion {
         } catch (SQLException ex) {
             Logger.getLogger(QuestionDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
+        return list_question;
+    }
 
+    @Override
+    public ArrayList<Question> getListQuestionBySearchName(String name_search, int pageIndex, int pageSize) {
+        ArrayList<Question> list_question = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM (SELECT ROW_NUMBER() over (order by q.id ASC) as rn,\n"
+                    + "q.id, q.quiz, q.op1, q.op2, q.op3, q.op4, q.solution,\n"
+                    + "c.id as [cid], c.name as [cname], c.display_name,\n"
+                    + "d.id as [did], d.name as [dname]\n"
+                    + "FROM Question q INNER JOIN Course c\n"
+                    + "ON q.course_id = c.id INNER JOIN Department d\n"
+                    + "ON c.department_id = d.id\n"
+                    + "where q.quiz like '%' + ? +'%') as x\n"
+                    + "WHERE rn between (?-1)*? + 1 and ?*?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, name_search);
+            stm.setInt(2, pageIndex);
+            stm.setInt(3, pageSize);
+            stm.setInt(4, pageIndex);
+            stm.setInt(5, pageSize);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Question q = new Question();
+                q.setId(rs.getInt("id"));
+                q.setQuiz(rs.getString("quiz"));
+                q.setOp1(rs.getString("op1"));
+                q.setOp2(rs.getString("op2"));
+                q.setOp3(rs.getString("op3"));
+                q.setOp4(rs.getString("op4"));
+                q.setSolution(rs.getInt("solution"));
+                Course c = new Course();
+                c.setId(rs.getInt("cid"));
+                c.setName(rs.getString("cname"));
+                c.setDisplay_name(rs.getString("display_name"));
+                Department d = new Department();
+                d.setId(rs.getInt("did"));
+                d.setName(rs.getString("dname"));
+                c.setDepartment(d);
+                q.setCourse(c);
+                list_question.add(q);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(QuestionDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list_question;
     }
 
     @Override
@@ -192,6 +237,23 @@ public class QuestionDAO extends DBContext implements IQuestion {
     }
 
     @Override
+    public int countQuestionByNameSearch(String name_search) {
+        int count = 0;
+        try {
+            String sql = "SELECT COUNT(id) FROM Question where quiz like '%' + ? + '%'";
+            PreparedStatement stm = connection.prepareCall(sql);
+            stm.setString(1, name_search);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(QuestionDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
+    }
+
+    @Override
     public int countQuestionByCourse(int course_id) {
         int count = 0;
         try {
@@ -217,20 +279,15 @@ public class QuestionDAO extends DBContext implements IQuestion {
     public int countQuestionByCourseIdAndSearch(String search_name, int course_id) {
         int count = 0;
         try {
-            String sql = "";
-            if (course_id == 0) {
-                sql = "SELECT COUNT(q.id) \n"
-                        + "FROM Question q inner join Courses c\n"
-                        + "ON q.course_id = c.id \n"
-                        + "where q.quiz like '%' + ? + '%'";
-            } else {
-                sql = "SELECT COUNT(q.id) \n"
+            
+            String sql = "SELECT COUNT(q.id) \n"
                         + "FROM Question q inner join Course c\n"
                         + "ON q.course_id = c.id \n"
-                        + "where c.id = " + course_id + " and q.quiz like '%' + ? + '%'";
-            }
+                        + "where c.id = ? and q.quiz like '%' + ? + '%'";
+            
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setString(1, search_name);
+            stm.setInt(1, course_id);
+            stm.setString(2, search_name);
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
                 count = rs.getInt(1);

@@ -5,12 +5,19 @@
  */
 package controller.question;
 
+import dao.ICourse;
+import dao.IQuestion;
+import dao.impl.CourseDAO;
+import dao.impl.QuestionDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Course;
+import model.Question;
 
 /**
  *
@@ -56,7 +63,10 @@ public class InsertQuestionController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        ICourse course_dao = new CourseDAO();
+        ArrayList<Course> list_course = course_dao.list_course();
+        request.setAttribute("list_course", list_course);
+        request.getRequestDispatcher("../view/question/insert.jsp").forward(request, response);
     }
 
     /**
@@ -70,7 +80,19 @@ public class InsertQuestionController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        IQuestion question_dao = new QuestionDAO();
+        Question q = new Question();
+        q.setQuiz(request.getParameter("quiz"));
+        q.setOp1(request.getParameter("op1"));
+        q.setOp2(request.getParameter("op2"));
+        q.setOp3(request.getParameter("op3"));
+        q.setOp4(request.getParameter("op4"));
+        q.setSolution(Integer.parseInt(request.getParameter("solution")));
+        Course c = new Course();
+        c.setId(Integer.parseInt(request.getParameter("cid")));
+        q.setCourse(c);
+        question_dao.insert(q);
+        response.sendRedirect("insert");
     }
 
     /**

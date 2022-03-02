@@ -17,6 +17,7 @@ public class Question {
     private String op3;
     private String op4;
     private int solution;
+    private String solutionStr;
     private Course course;
 
     public Question() {
@@ -92,7 +93,27 @@ public class Question {
     public Course getCourse() {
         return course;
     }
-
+    
+    
+    
+    public String getSolutionStr(){
+        switch(solution){
+            case 1:
+                solutionStr = "Option 1";
+                return solutionStr;
+            case 2:
+                solutionStr = "Option 2";
+                return solutionStr;
+            case 3:
+                solutionStr = "Option 3";
+                return solutionStr;
+            case 4:
+                solutionStr = "Option 4";
+                return solutionStr;
+        }
+        return null;
+    }
+    
     public void setCourse(Course course) {
         this.course = course;
     }
