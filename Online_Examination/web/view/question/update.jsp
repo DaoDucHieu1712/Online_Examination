@@ -390,7 +390,7 @@
                                value="3" class="section__radio">
                         <label class="section_lable--radio">Option 3 </label>
                         <input type="radio" name="solution"
-                               ${question.solution == 3 ?"checked":""}
+                               ${question.solution == 4 ?"checked":""}
                                value="4" class="section__radio">
                         <label class="section_lable--radio">Option 4 </label>
                     </div>

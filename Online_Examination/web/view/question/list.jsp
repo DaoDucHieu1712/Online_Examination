@@ -442,7 +442,7 @@
                                 <td>
                                     <a href="detail?id=${q.id}"><i class="fa fa-file section__icon"></i></a>
                                     <a href="update?id=${q.id}"><i class="fa fa-edit section__icon"></i></a>
-                                    <a onclick="do_delete(${q.id})" ><i class="fa fa-trash section__icon"></i></a>
+                                    <a onclick="do_delete(${q.id})"><i class="fa fa-trash section__icon"></i></a>
                                 </td>
                             </tr>
                         </c:forEach>

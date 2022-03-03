@@ -72,6 +72,30 @@
         <servlet-name>DeleteQuestionController</servlet-name>
         <servlet-class>controller.question.DeleteQuestionController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListExamController</servlet-name>
+        <servlet-class>controller.exam.ListExamController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DetailExamController</servlet-name>
+        <servlet-class>controller.exam.DetailExamController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateExamController</servlet-name>
+        <servlet-class>controller.exam.UpdateExamController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InsertExamController</servlet-name>
+        <servlet-class>controller.exam.InsertExamController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteExamController</servlet-name>
+        <servlet-class>controller.exam.DeleteExamController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CourseExamController</servlet-name>
+        <servlet-class>controller.exam.CourseExamController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>loginController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -143,6 +167,30 @@
     <servlet-mapping>
         <servlet-name>DeleteQuestionController</servlet-name>
         <url-pattern>/question/delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListExamController</servlet-name>
+        <url-pattern>/exam/list</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DetailExamController</servlet-name>
+        <url-pattern>/exam/detail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateExamController</servlet-name>
+        <url-pattern>/exam/update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InsertExamController</servlet-name>
+        <url-pattern>/exam/insert</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteExamController</servlet-name>
+        <url-pattern>/exam/delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CourseExamController</servlet-name>
+        <url-pattern>/exam/course</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
