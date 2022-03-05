@@ -14,13 +14,21 @@ import model.Exam;
  */
 public interface IExam {
     
-    public ArrayList<Exam> getAllListExam();
+    public ArrayList<Exam> getAllListExam(int pageIndex, int pageSize);
     
-    public ArrayList<Exam> getListExamByNameSearch(String name_search);
+    public ArrayList<Exam> getListExamByNameSearch(String name_search, int pageIndex, int pageSize);
     
-    public ArrayList<Exam> getListExamByCourseId(int course_id);
+    public ArrayList<Exam> getListExamByCourseId(int course_id, int pageIndex, int pageSize);
     
-    public ArrayList<Exam> getListExamByNameSearchAndCourseId(String name_search, int course_id);
+    public ArrayList<Exam> getListExamByNameSearchAndCourseId(String name_search, int course_id, int pageIndex, int pageSize);
+    
+    public int countAllExam();
+    
+    public int countExamBySearch(String name_search);
+    
+    public int countExamByCid(int course_id);
+    
+    public int countExamByCidAndSearch(int course_id, String name_search);
     
     public void insert(Exam exam);
     

@@ -1,9 +1,8 @@
 <%-- 
-    Document   : insert
-    Created on : Mar 2, 2022, 11:01:07 PM
+    Document   : feedback
+    Created on : Mar 5, 2022, 8:41:20 AM
     Author     : ADMIN
 --%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -19,7 +18,7 @@
                 font-family: "Poppins", sans-serif;
             }
 
-            * {
+            *{
                 margin: 0;
                 padding: 0;
                 box-sizing: border-box;
@@ -195,119 +194,90 @@
             }
 
             /*# sourceMappingURL=dashboard.css.map */
-            select,
             button,
+            select,
             input,
-            textarea,
-            option {
+            textarea {
                 font-family: "Poppins", sans-serif;
+                resize: none;
             }
 
             .section {
-                padding: 25px;
                 margin: 150px auto;
-                width: 1000px;
-                min-height: 600px;
-                background-color: white;
-                box-shadow: 0 0 3px 6px rgba(0, 0, 0, 0.151);
-                transform: translateX(100px);
-                border-radius: 2rem;
                 display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 1200px;
+                padding: 30px;
             }
-
-            .section-form {
-                margin: 35px 0;
-            }
-
-            .section__label {
-                display: block;
-            }
-
-            .section__select {
-                margin-bottom: 10px;
-                width: 280px;
-                font-size: 1.2rem;
-                display: block;
-                outline: none;
-                padding: 10px;
-                background-color: rgba(153, 153, 153, 0.178);
-                border-radius: 10px;
-                border: 2px solid #999;
-            }
-
-            .section__select:focus {
-                border-color: #0eb582;
-                box-shadow: 0 0 4px 3px rgba(14, 181, 130, 0.4);
-            }
-
-            .section__option {
-                background-color: rgba(14, 181, 130, 0.4);
-                padding: 10px;
-            }
-
-            .section__input {
-                margin-bottom: 10px;
-                width: 280px;
-                font-size: 1.2rem;
-                display: block;
-                outline: none;
-                padding: 10px;
-                background-color: rgba(153, 153, 153, 0.178);
-                border-radius: 10px;
-                border: 2px solid #999;
-            }
-
-            .section__input:focus {
-                border-color: #0eb582;
-                box-shadow: 0 0 4px 3px rgba(14, 181, 130, 0.4);
-            }
-
-            .section__heading {
-                margin-bottom: 30px;
-                font-size: 2.1rem;
-                color: #0eb582;
-                font-weight: bold;
-                text-transform: uppercase;
-                position: relative;
-            }
-
-            .section__heading::before {
-                content: "";
-                position: absolute;
-                bottom: 0;
-                width: 50px;
-                height: 5px;
-                background-color: #0eb582;
-                border-radius: 3px;
-            }
-
-            .section__detail {
-                width: 50%;
-            }
-
             .section__img {
                 width: 50%;
             }
-
-            .section__submit {
+            .section__detail {
+                padding: 15px;
+                border: 2px solid #0eb582;
+                width: 50%;
+                height: 100%;
+            }
+            .section__heading {
+                font-size: 2rem;
+                color: #0eb582;
+                font-weight: bold;
+                padding-bottom: 3px;
+                text-transform: uppercase;
+                margin-bottom: 35px;
+                position: relative;
+            }
+            .section__heading::before {
+                content: "";
+                position: absolute;
+                background-color: #0eb582;
+                width: 40px;
+                height: 5px;
+                bottom: 0;
+                border-radius: 1rem;
+            }
+            .section-form {
+                margin: 20px 0;
+            }
+            .section_lable {
+                display: block;
+                margin-bottom: 6px;
+                font-size: 1.4rem;
+                color: #555;
+            }
+            .section__input,
+            .section .section__textarea {
                 border: none;
                 outline: none;
-                padding: 10px 12px;
-                background-color: rgba(14, 181, 130, 0.5);
-                border: 2px solid #0eb582;
-                border-radius: 10px;
+                border: 1px solid #0eb582;
+                padding: 8px;
+                width: 100%;
+                transition: 0.25s linear;
+            }
+            .section__input:focus,
+            .section .section__textarea:focus {
+                background-color: #0eb582;
+                color: white;
+            }
+            .section__input:focus::-webkit-input-placeholder,
+            .section .section__textarea:focus::-webkit-input-placeholder {
+                color: white;
+            }
+            .section__submit {
                 cursor: pointer;
-                box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.562);
+                border: none;
+                outline: none;
+                padding: 10px 15px;
+                border: 1px solid #0eb582;
+                transition: 0.25s linear;
+            }
+            .section__submit:hover {
+                background-color: #0eb582;
+                color: white;
             }
 
-            .section__submit:active {
-                transform: translateY(2px);
-                box-shadow: 1px 1px 0px 0px rgba(0, 0, 0, 0.562);
-            }
-
-            /*# sourceMappingURL=insert-course.css.map */
-
-            /*# sourceMappingURL=exam-insert.css.map */
+            /*# sourceMappingURL=feedback.css.map */
 
         </style>
     </head>
@@ -315,14 +285,13 @@
         <header class="header">
             <div class="header__dashboard">
                 <i class="fa-solid fa-bars header__bar"></i>
-                <a href="../auth/dashboard" class="header__logo"><i class="fa-solid fa-user-graduate header__icon"></i>Dashboard</a>
+                <a href="../auth/dashboard" class="header__logo"><i class="fa-solid fa-graduation-cap"></i></i>ExamOnline</a>
             </div>
             <ul class="header__list">
-                <li class="header__items"><a href="#">Student</a></li>
-                <li class="header__items"><a href="../course/list">Course</a></li>
-                <li class="header__items"><a href="../question/list">Question</a></li>
-                <li class="header__items"><a href="list">Exam</a></li>
-                <li class="header__items"><a href="../feedback/list">Feedback</a></li>
+                <li class="header__items"><a href="#">Home</a></li>
+                <li class="header__items"><a href="#">About</a></li>
+                <li class="header__items"><a href="#">Exam</a></li>
+                <li class="header__items"><a href="feedback">Feedback</a></li>
             </ul>
             <div class="header__account">
                 <c:if test="${sessionScope.account eq null}">
@@ -330,63 +299,37 @@
                             class="fa-solid fa-user header__account-icon"></i></a> 
                     </c:if>
                     <c:if test="${sessionScope.account ne null}">
-                    <span class="header__name">${sessionScope.account.full_name}<i onclick="show_dropdown()"
-                                                                                   class="fa-solid fa-caret-down"></i></span>
+                    <span class="header__name">${sessionScope.account.full_name} <i onclick="show_dropdown()"
+                                                                                    class="fa-solid fa-caret-down"></i></span>
                     </c:if>
-                <ul class="header__dropdown">
-                    <li class="header__dropdown-items"><a href="../auth/infomation"><i class="fa-solid fa-user-check"></i>infomation</a></li>
-                    <li class="header__dropdown-items"><a href="../auth/changepassword"><i class="fa-solid fa-lock"></i>change password</a></li>
-                    <li class="header__dropdown-items"><a href="../logout"><i class="fa-solid fa-right-from-bracket"></i>Logout</>
-                    </li>
-                </ul>
+                    <ul class="header__dropdown">
+                        <li class="header__dropdown-items"><a href="../auth/infomation"><i class="fa-solid fa-user-check"></i>infomation</a></li>
+                        <li class="header__dropdown-items"><a href="../auth/changepassword"><i class="fa-solid fa-lock"></i>change password</a></li>
+                        <li class="header__dropdown-items"><a href="../logout"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
+                        </li>
+                    </ul>
             </div>
         </header>
-        <div class="sidebar sidebar-show">
-            <h2 class="sidebar__heading">Exam Manager</h2>
-            <ul class="sidebar__list">
-                <c:forEach items="${list_course}" var="c">
-                    <li class="sidebar__items"><a href="course?cid=${c.id}">${c.name}<i class="fa-solid fa-caret-right"></i></a></li>
-                        </c:forEach>
-            </ul>
-        </div>
         <div class="section">
+            <div class="section__img">
+                <img src="http://127.0.0.1:5500/image/image/contact-img.png" alt="">
+            </div>
             <div class="section__detail">
-                <h2 class="section__heading">Exam Create</h2>
+                <h2 class="section__heading">Feedback</h2>
                 <form action="insert" method="POST">
                     <div class="section-form">
-                        <label class="section_lable">Name Exam</label>
-                        <input type="text" name="name_exam" class="section__input">
+                        <label class="section_lable">Title</label>
+                        <input type="text" class="section__input" name="title" placeholder="title ....">
                     </div>
                     <div class="section-form">
-                        <label class="section_lable">Time</label>
-                        <input type="number" name="time" min="0" class="section__input">
+                        <label class="section_lable">Massage</label>
+                        <textarea class="section__textarea" cols="50" name="massage" rows="7" placeholder="massage ...."></textarea>
                     </div>
-                    <div class="section-form">
-                        <label class="section_lable">Quantity</label>
-                        <input type="number" name="quantity_quiz" min="0" class="section__input">
-                    </div>
-                    <div class="section-form">
-                        <Select class="section__select" name="cid">
-                            <c:forEach items="${list_course}" var="c">
-                                <option class="section__option" value="${c.id}">${c.name}</option>
-                            </c:forEach>
-                        </Select>
-                    </div>
-                    <div class="section-form">
-                        <label class="section_lable">Start</label>
-                        <input type="date" name="date_start" class="section__input">
-                    </div>
-                    <div class="section-form">
-                        <label class="section_lable">Finish</label>
-                        <input type="date" name="date_end" class="section__input">
-                    </div>
-                    <button type="submit" class="section__submit">Create</button>
+                    <button type="submit" class="section__submit">Send Massage</button>
                 </form>
             </div>
-            <div class="section__img">
-                <img src="http://127.0.0.1:5500/image/image/course-1-1.png" alt="">
-            </div>
         </div>
+
         <script>
             function show_dropdown() {
                 document.querySelector('.header__dropdown').classList.toggle('droppdown-ishow');

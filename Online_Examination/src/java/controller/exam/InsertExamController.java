@@ -5,12 +5,20 @@
  */
 package controller.exam;
 
+import dao.ICourse;
+import dao.IExam;
+import dao.impl.CourseDAO;
+import dao.impl.ExamDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Course;
+import model.Exam;
 
 /**
  *
@@ -56,7 +64,10 @@ public class InsertExamController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        ICourse course_dao = new CourseDAO();
+        ArrayList<Course> list_course = course_dao.list_course();
+        request.setAttribute("list_course", list_course);
+        request.getRequestDispatcher("../view/exam/insert.jsp").forward(request, response);
     }
 
     /**
@@ -70,7 +81,18 @@ public class InsertExamController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        IExam exam_dao = new ExamDAO();
+        Exam e = new Exam();
+        e.setName_exam(request.getParameter("name_exam"));
+        e.setTime(Integer.parseInt(request.getParameter("time")));
+        e.setQuantity_quiz(Integer.parseInt(request.getParameter("quantity_quiz")));
+        e.setDate_start(Date.valueOf(request.getParameter("date_start")));
+        e.setDate_end(Date.valueOf(request.getParameter("date_end")));
+        Course c = new Course();
+        c.setId(Integer.parseInt(request.getParameter("cid")));
+        e.setCourse(c);
+        exam_dao.insert(e);
+        response.sendRedirect("list");
     }
 
     /**

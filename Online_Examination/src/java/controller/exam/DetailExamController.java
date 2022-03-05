@@ -5,12 +5,18 @@
  */
 package controller.exam;
 
+import dao.ICourse;
+import dao.IExam;
+import dao.impl.CourseDAO;
+import dao.impl.ExamDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Course;
+import model.Exam;
 
 /**
  *
@@ -29,19 +35,16 @@ public class DetailExamController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet DetailExamController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet DetailExamController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        
+        int id = Integer.parseInt(request.getParameter("id"));
+        ICourse course_dao = new CourseDAO();
+        IExam exam_dao = new ExamDAO();
+        
+        ArrayList<Course> list_course = course_dao.list_course();
+        Exam exam = exam_dao.getExam(id);
+        request.setAttribute("list_course", list_course);
+        request.setAttribute("exam", exam);
+        request.getRequestDispatcher("../view/exam/detail.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

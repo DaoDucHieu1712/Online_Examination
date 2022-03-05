@@ -1,6 +1,6 @@
 <%-- 
     Document   : list
-    Created on : Mar 2, 2022, 11:00:52 PM
+    Created on : Mar 5, 2022, 8:41:11 AM
     Author     : ADMIN
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -18,7 +18,7 @@
                 font-family: "Poppins", sans-serif;
             }
 
-            * {
+            *{
                 margin: 0;
                 padding: 0;
                 box-sizing: border-box;
@@ -194,7 +194,6 @@
             }
 
             /*# sourceMappingURL=dashboard.css.map */
-
             button,
             input,
             textarea,
@@ -205,7 +204,7 @@
             .section {
                 margin: 150px auto;
                 width: 1000px;
-                min-height: 600px;
+                height: 600px;
                 background-color: white;
                 box-shadow: 0 0 3px 6px rgba(0, 0, 0, 0.151);
                 transform: translateX(100px);
@@ -360,9 +359,16 @@
                 box-shadow: 0 0 2px 0 #0eb582;
             }
 
+            .section_desc {
+                max-width: 120px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
             /*# sourceMappingURL=list-course.css.map */
 
-            /*# sourceMappingURL=exam-list.css.map */
+            /*# sourceMappingURL=feedback-list.css.map */
 
         </style>
         <script>
@@ -375,10 +381,11 @@
         </script>
     </head>
     <body>
+
         <header class="header">
             <div class="header__dashboard">
                 <i class="fa-solid fa-bars header__bar"></i>
-                <a href="#home" class="header__logo"><i class="fa-solid fa-user-graduate header__icon"></i>Dashboard</a>
+                <a href="../auth/dashboard" class="header__logo"><i class="fa-solid fa-user-graduate header__icon"></i>Dashboard</a>
             </div>
             <ul class="header__list">
                 <li class="header__items"><a href="#">Student</a></li>
@@ -405,14 +412,11 @@
             </div>
         </header>
         <div class="sidebar sidebar-show">
-            <h2 class="sidebar__heading">Exam Manager</h2>
+            <h2 class="sidebar__heading">FeedBack</h2>
             <ul class="sidebar__list">
-                <c:forEach items="${list_course}" var="c">
-                    <li class="sidebar__items"><a href="course?cid=${c.id}">${c.name}<i class="fa-solid fa-caret-right"></i></a></li>
-                        </c:forEach>
+                <li class="sidebar__items"><a>Inbox<i class="fa-solid fa-caret-right"></i></a></li>
             </ul>
         </div>
-
         <div class="section">
             <div class="section__search">
                 <form action="list" method="GET">
@@ -425,43 +429,39 @@
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Name Exam</th>
-                            <th>Time</th>
-                            <th>Quantity</th>
-                            <th>Course Name</th>
-                            <th>Start</th>
-                            <th>Finish</th>
+                            <th>Full_Name</th>
+                            <th>Email</th>
+                            <th>Title</th>
+                            <th>Massage</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${list_exam}" var="e">
+                        <c:forEach items="${requestScope.list_feedback}" var="f">
                             <tr>
-                                <td>${e.id}</td>
-                                <td>${e.name_exam}</td>
-                                <td>${e.time}</td>
-                                <td>${e.quantity_quiz}</td>
-                                <td>${e.course.name}</td>
-                                <td>${e.date_start}</td>
-                                <td>${e.date_end}</td>
+                                <td>${f.id}</td>
+                                <td>${f.full_name}</td>
+                                <td>${f.email}</td>
+                                <td>${f.title}</td>
                                 <td>
-                                    <a href="detail?id=${e.id}"><i class="fa fa-file section__icon"></i></a>
-                                    <a href="update?id=${e.id}"><i class="fa fa-edit section__icon"></i></a>
-                                    <a onclick="do_delete(${e.id})"><i class="fa fa-trash section__icon"></i></a>
+                                    <p class="section_desc">${f.massage}</p>
+                                </td>
+                                <td>
+                                    <a href="detail?id=${f.id}"><i class="fa fa-file section__icon"></i></a>
+                                    <a onclick="do_delete(${f.id})"><i class="fa fa-trash section__icon"></i></a>
                                 </td>
                             </tr>
                         </c:forEach>
                     </tbody>
                 </table>
-                <span class="section__insert">Click here is <a href="insert">Create Exam</a></span>
                 <c:if test="${maxPage > 1}">
                     <div id="pagination" class="pagger"></div>
                 </c:if>
             </div>
 
         </div>
-
         <script>
+
             function show_dropdown() {
                 document.querySelector('.header__dropdown').classList.toggle('droppdown-ishow');
             }
@@ -483,29 +483,7 @@
                 container.innerHTML += '<a href="list?pageIndex=' + maxPage + '">Last</a>';
             }
 
-            function generateBySearchName(div, pageIndex, maxPage, gap, name_search) {
-                var container = document.getElementById(div);
-//                    if (pageIndex - gap > 1)
-                container.innerHTML += '<a href="list?name_search=' + name_search + '&pageIndex=1">First</a>';
-                for (var i = pageIndex - gap; i < pageIndex; i++) {
-                    if (i > 0)
-                        container.innerHTML += '<a href="list?name_search=' + name_search + '&pageIndex=' + i + '">' + i + '</a>';
-                }
-                container.innerHTML += '<span>' + pageIndex + '</span>';
-                for (var i = pageIndex + 1; i <= pageIndex + gap; i++) {
-                    if (i <= maxPage)
-                        container.innerHTML += '<a href="list?name_search=' + name_search + '&pageIndex=' + i + '">' + i + '</a>';
-                }
-//                    if (maxPage + gap < maxPage)
-                container.innerHTML += '<a href="list?name_search=' + name_search + '&pageIndex=' + maxPage + '">Last</a>';
-            }
-
-            if (${name_search.length()} === 0) {
-                generate('pagination', ${pageIndex}, ${maxPage}, 2);
-            } else {
-                generateBySearchName('pagination',${pageIndex},${maxPage}, 2, '${name_search}');
-            }
-
+            generate('pagination', ${pageIndex}, ${maxPage}, 2);
         </script>
     </body>
 </html>

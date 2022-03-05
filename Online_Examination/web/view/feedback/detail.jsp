@@ -1,9 +1,8 @@
 <%-- 
-    Document   : insert
-    Created on : Mar 2, 2022, 11:01:07 PM
+    Document   : detail
+    Created on : Mar 5, 2022, 8:41:31 AM
     Author     : ADMIN
 --%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -19,7 +18,7 @@
                 font-family: "Poppins", sans-serif;
             }
 
-            * {
+            *{
                 margin: 0;
                 padding: 0;
                 box-sizing: border-box;
@@ -195,123 +194,54 @@
             }
 
             /*# sourceMappingURL=dashboard.css.map */
-            select,
-            button,
-            input,
-            textarea,
-            option {
-                font-family: "Poppins", sans-serif;
-            }
-
             .section {
-                padding: 25px;
                 margin: 150px auto;
+                transform: translateX(100px);
                 width: 1000px;
                 min-height: 600px;
-                background-color: white;
-                box-shadow: 0 0 3px 6px rgba(0, 0, 0, 0.151);
-                transform: translateX(100px);
-                border-radius: 2rem;
-                display: flex;
+                padding: 30px;
+                background-color: rgba(14, 181, 130, 0.1);
+                border-radius: 1rem;
             }
-
-            .section-form {
-                margin: 35px 0;
+            .section__feedback {
+                user-select: none;
             }
-
-            .section__label {
-                display: block;
-            }
-
-            .section__select {
-                margin-bottom: 10px;
-                width: 280px;
-                font-size: 1.2rem;
-                display: block;
-                outline: none;
-                padding: 10px;
-                background-color: rgba(153, 153, 153, 0.178);
-                border-radius: 10px;
-                border: 2px solid #999;
-            }
-
-            .section__select:focus {
-                border-color: #0eb582;
-                box-shadow: 0 0 4px 3px rgba(14, 181, 130, 0.4);
-            }
-
-            .section__option {
-                background-color: rgba(14, 181, 130, 0.4);
-                padding: 10px;
-            }
-
-            .section__input {
-                margin-bottom: 10px;
-                width: 280px;
-                font-size: 1.2rem;
-                display: block;
-                outline: none;
-                padding: 10px;
-                background-color: rgba(153, 153, 153, 0.178);
-                border-radius: 10px;
-                border: 2px solid #999;
-            }
-
-            .section__input:focus {
-                border-color: #0eb582;
-                box-shadow: 0 0 4px 3px rgba(14, 181, 130, 0.4);
-            }
-
             .section__heading {
-                margin-bottom: 30px;
-                font-size: 2.1rem;
+                font-size: 2rem;
                 color: #0eb582;
-                font-weight: bold;
-                text-transform: uppercase;
+                padding-bottom: 3px;
                 position: relative;
+                margin-bottom: 35px;
             }
-
             .section__heading::before {
                 content: "";
                 position: absolute;
-                bottom: 0;
-                width: 50px;
+                width: 40px;
                 height: 5px;
-                background-color: #0eb582;
                 border-radius: 3px;
+                background-color: #0eb582;
+                bottom: 0;
+            }
+            .section__title {
+                font-size: 1.6rem;
+                font-weight: bold;
+            }
+            .section__from {
+                font-size: 1rem;
+                padding-bottom: 15px;
+                margin-bottom: 30px;
+                border-bottom: 1px solid #999;
+            }
+            .section__massage {
+                font-size: 1.3rem;
             }
 
-            .section__detail {
-                width: 50%;
-            }
-
-            .section__img {
-                width: 50%;
-            }
-
-            .section__submit {
-                border: none;
-                outline: none;
-                padding: 10px 12px;
-                background-color: rgba(14, 181, 130, 0.5);
-                border: 2px solid #0eb582;
-                border-radius: 10px;
-                cursor: pointer;
-                box-shadow: 2px 2px 0px 0px rgba(0, 0, 0, 0.562);
-            }
-
-            .section__submit:active {
-                transform: translateY(2px);
-                box-shadow: 1px 1px 0px 0px rgba(0, 0, 0, 0.562);
-            }
-
-            /*# sourceMappingURL=insert-course.css.map */
-
-            /*# sourceMappingURL=exam-insert.css.map */
+            /*# sourceMappingURL=detail-feedback.css.map */
 
         </style>
     </head>
     <body>
+
         <header class="header">
             <div class="header__dashboard">
                 <i class="fa-solid fa-bars header__bar"></i>
@@ -330,8 +260,8 @@
                             class="fa-solid fa-user header__account-icon"></i></a> 
                     </c:if>
                     <c:if test="${sessionScope.account ne null}">
-                    <span class="header__name">${sessionScope.account.full_name}<i onclick="show_dropdown()"
-                                                                                   class="fa-solid fa-caret-down"></i></span>
+                    <span class="header__name">${sessionScope.account.full_name} <i onclick="show_dropdown()"
+                                                                                    class="fa-solid fa-caret-down"></i></span>
                     </c:if>
                 <ul class="header__dropdown">
                     <li class="header__dropdown-items"><a href="../auth/infomation"><i class="fa-solid fa-user-check"></i>infomation</a></li>
@@ -342,49 +272,19 @@
             </div>
         </header>
         <div class="sidebar sidebar-show">
-            <h2 class="sidebar__heading">Exam Manager</h2>
+            <h2 class="sidebar__heading">FeedBack</h2>
             <ul class="sidebar__list">
-                <c:forEach items="${list_course}" var="c">
-                    <li class="sidebar__items"><a href="course?cid=${c.id}">${c.name}<i class="fa-solid fa-caret-right"></i></a></li>
-                        </c:forEach>
+                <li class="sidebar__items"><a>Inbox<i class="fa-solid fa-caret-right"></i></a></li>
             </ul>
         </div>
         <div class="section">
-            <div class="section__detail">
-                <h2 class="section__heading">Exam Create</h2>
-                <form action="insert" method="POST">
-                    <div class="section-form">
-                        <label class="section_lable">Name Exam</label>
-                        <input type="text" name="name_exam" class="section__input">
-                    </div>
-                    <div class="section-form">
-                        <label class="section_lable">Time</label>
-                        <input type="number" name="time" min="0" class="section__input">
-                    </div>
-                    <div class="section-form">
-                        <label class="section_lable">Quantity</label>
-                        <input type="number" name="quantity_quiz" min="0" class="section__input">
-                    </div>
-                    <div class="section-form">
-                        <Select class="section__select" name="cid">
-                            <c:forEach items="${list_course}" var="c">
-                                <option class="section__option" value="${c.id}">${c.name}</option>
-                            </c:forEach>
-                        </Select>
-                    </div>
-                    <div class="section-form">
-                        <label class="section_lable">Start</label>
-                        <input type="date" name="date_start" class="section__input">
-                    </div>
-                    <div class="section-form">
-                        <label class="section_lable">Finish</label>
-                        <input type="date" name="date_end" class="section__input">
-                    </div>
-                    <button type="submit" class="section__submit">Create</button>
-                </form>
-            </div>
-            <div class="section__img">
-                <img src="http://127.0.0.1:5500/image/image/course-1-1.png" alt="">
+            <div class="section__feedback">
+                <h2 class="section__heading">Feedback</h2>
+                <h3 class="section__title">Title: <span>${feedback.title}</span></h3>
+                <h5 class="section__from">form: ${feedback.full_name} - <span>${feedback.email}</span></h5>
+                <p class="section__massage">
+                    ${feedback.massage}
+                </p>
             </div>
         </div>
         <script>

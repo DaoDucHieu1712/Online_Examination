@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.exam;
+package controller.feedback;
 
-import dao.IExam;
-import dao.impl.ExamDAO;
+import dao.IFeedback;
+import dao.impl.FeedbackDAO;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ADMIN
  */
-public class DeleteExamController extends HttpServlet {
+public class DeleteFeedbackController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,8 +31,8 @@ public class DeleteExamController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        IExam exam_dao = new ExamDAO();
-        exam_dao.delete(id);
+        IFeedback feedback_dao = new FeedbackDAO();
+        feedback_dao.delete(id);
         response.sendRedirect("list");
     }
 

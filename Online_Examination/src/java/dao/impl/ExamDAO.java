@@ -23,14 +23,21 @@ import model.Exam;
 public class ExamDAO extends DBContext implements IExam {
 
     @Override
-    public ArrayList<Exam> getAllListExam() {
+    public ArrayList<Exam> getAllListExam(int pageIndex, int pageSize) {
         ArrayList<Exam> list_exam = new ArrayList<>();
         try {
-            String sql = "SELECT e.id, e.name_exam, e.time, e.quantity_quiz, e.date_start, e.date_end,\n"
-                    + "c.id as cid , c.name as cname\n"
-                    + "FROM Exam e INNER JOIN Course c\n"
-                    + "ON e.course_id = c.id";
+            String sql = "SELECT * FROM (\n"
+                    + "SELECT ROW_NUMBER() over (order by e.id ASC) as rn, \n"
+                    + "e.id, e.name_exam, e.time, e.quantity_quiz, e.date_start, e.date_end,\n"
+                    + "c.id as cid ,c.name as cname,c.display_name\n"
+                    + "FROM Exam e inner join Course c\n"
+                    + "ON e.course_id = c.id) as x\n"
+                    + "WHERE rn between (?-1)*? + 1 and ?*?";
             PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, pageIndex);
+            stm.setInt(2, pageSize);
+            stm.setInt(3, pageIndex);
+            stm.setInt(4, pageSize);
             ResultSet rs = stm.executeQuery();
 
             while (rs.next()) {
@@ -55,16 +62,23 @@ public class ExamDAO extends DBContext implements IExam {
     }
 
     @Override
-    public ArrayList<Exam> getListExamByNameSearch(String name_search) {
+    public ArrayList<Exam> getListExamByNameSearch(String name_search, int pageIndex, int pageSize) {
         ArrayList<Exam> list_exam = new ArrayList<>();
         try {
-            String sql = "SELECT e.id, e.name_exam, e.time, e.quantity_quiz, e.date_start, e.date_end,\n"
-                    + "c.id as cid , c.name as cname\n"
-                    + "FROM Exam e INNER JOIN Course c\n"
-                    + "ON e.course_id = c.id Where e.name_exam like '%' + ? + '%'";
+            String sql = "SELECT * FROM (\n"
+                    + "SELECT ROW_NUMBER() over (order by e.id ASC) as rn, \n"
+                    + "e.id, e.name_exam, e.time, e.quantity_quiz, e.date_start, e.date_end,\n"
+                    + "c.id as cid ,c.name as cname,c.display_name\n"
+                    + "FROM Exam e inner join Course c\n"
+                    + "ON e.course_id = c.id WHere e.name_exam  like '%'+?+'%') as x\n"
+                    + "WHERE rn between (?-1)*? + 1 and ?*?";
 
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, name_search);
+            stm.setInt(2, pageIndex);
+            stm.setInt(3, pageSize);
+            stm.setInt(4, pageIndex);
+            stm.setInt(5, pageSize);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Exam e = new Exam();
@@ -87,15 +101,22 @@ public class ExamDAO extends DBContext implements IExam {
     }
 
     @Override
-    public ArrayList<Exam> getListExamByCourseId(int course_id) {
+    public ArrayList<Exam> getListExamByCourseId(int course_id, int pageIndex, int pageSize) {
         ArrayList<Exam> list_exam = new ArrayList<>();
         try {
-            String sql = "SELECT e.id, e.name_exam, e.time, e.quantity_quiz, e.date_start, e.date_end,\n"
-                    + "c.id as cid , c.name as cname\n"
-                    + "FROM Exam e INNER JOIN Course c\n"
-                    + "ON e.course_id = c.id Where  c.id = ?";
+            String sql = "SELECT * FROM (\n"
+                    + "SELECT ROW_NUMBER() over (order by e.id ASC) as rn, \n"
+                    + "e.id, e.name_exam, e.time, e.quantity_quiz, e.date_start, e.date_end,\n"
+                    + "c.id as cid ,c.name as cname,c.display_name\n"
+                    + "FROM Exam e inner join Course c\n"
+                    + "ON e.course_id = c.id WHere c.id = ?) as x\n"
+                    + "WHERE rn between (?-1)*? + 1 and ?*?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, course_id);
+            stm.setInt(2, pageIndex);
+            stm.setInt(3, pageSize);
+            stm.setInt(4, pageIndex);
+            stm.setInt(5, pageSize);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Exam e = new Exam();
@@ -108,6 +129,7 @@ public class ExamDAO extends DBContext implements IExam {
                 Course c = new Course();
                 c.setId(rs.getInt("cid"));
                 c.setName(rs.getString("cname"));
+                c.setDisplay_name(rs.getString("display_name"));
                 e.setCourse(c);
                 list_exam.add(e);
             }
@@ -118,16 +140,23 @@ public class ExamDAO extends DBContext implements IExam {
     }
 
     @Override
-    public ArrayList<Exam> getListExamByNameSearchAndCourseId(String name_search, int course_id) {
+    public ArrayList<Exam> getListExamByNameSearchAndCourseId(String name_search, int course_id, int pageIndex, int pageSize) {
         ArrayList<Exam> list_exam = new ArrayList<>();
         try {
-            String sql = "SELECT e.id, e.name_exam, e.time, e.quantity_quiz, e.date_start, e.date_end,\n"
-                    + "c.id as cid , c.name as cname\n"
-                    + "FROM Exam e INNER JOIN Course c\n"
-                    + "ON e.course_id = c.id Where  c.id = ? an e.name_exam like '%' + ? + '%'";
+            String sql = "SELECT * FROM (\n"
+                    + "SELECT ROW_NUMBER() over (order by e.id ASC) as rn, \n"
+                    + "e.id, e.name_exam, e.time, e.quantity_quiz, e.date_start, e.date_end,\n"
+                    + "c.id as cid ,c.name as cname,c.display_name\n"
+                    + "FROM Exam e inner join Course c\n"
+                    + "ON e.course_id = c.id WHERE c.id = ? AND e.name_exam like '%' + ? + '%') as x\n"
+                    + "WHERE rn between (?-1)*? + 1 and ?*?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, course_id);
             stm.setString(2, name_search);
+            stm.setInt(3, pageIndex);
+            stm.setInt(4, pageSize);
+            stm.setInt(5, pageIndex);
+            stm.setInt(6, pageSize);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Exam e = new Exam();
@@ -140,6 +169,7 @@ public class ExamDAO extends DBContext implements IExam {
                 Course c = new Course();
                 c.setId(rs.getInt("cid"));
                 c.setName(rs.getString("cname"));
+                c.setDisplay_name(rs.getString("display_name"));
                 e.setCourse(c);
                 list_exam.add(e);
             }
@@ -249,6 +279,90 @@ public class ExamDAO extends DBContext implements IExam {
         } catch (SQLException ex) {
             Logger.getLogger(ExamDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @Override
+    public int countAllExam() {
+        int count = 0;
+        try {
+            String sql = "Select COUNT(id) FROM Exam ";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                count = rs.getInt(1);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ExamDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
+    }
+
+    @Override
+    public int countExamBySearch(String name_search) {
+        int count = 0;
+        try {
+            String sql = "Select COUNT(id) \n"
+                    + "FROM Exam \n"
+                    + "WHERE name_exam like '%' + ? + '%'";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, name_search);
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                count = rs.getInt(1);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ExamDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
+    }
+
+    @Override
+    public int countExamByCid(int course_id) {
+        int count = 0;
+        try {
+            String sql = "Select COUNT(e.id) \n"
+                    + "FROM Exam e inner join Course c\n"
+                    + "ON e.course_id = c.id\n"
+                    + "WHERE c.id = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, course_id);
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                count = rs.getInt(1);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ExamDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
+    }
+
+    @Override
+    public int countExamByCidAndSearch(int course_id, String name_search) {
+        int count = 0;
+        try {
+            String sql = "Select COUNT(e.id) \n"
+                    + "FROM Exam e inner join Course c\n"
+                    + "ON e.course_id = c.id\n"
+                    + "WHERE c.id = ? and name_exam like '%' + ? + '%'";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, course_id);
+            stm.setString(2, name_search);
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                count = rs.getInt(1);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ExamDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
     }
 
 }
