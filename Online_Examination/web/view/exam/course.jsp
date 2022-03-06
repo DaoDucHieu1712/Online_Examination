@@ -378,10 +378,10 @@
         <header class="header">
             <div class="header__dashboard">
                 <i class="fa-solid fa-bars header__bar"></i>
-                <a href="#home" class="header__logo"><i class="fa-solid fa-user-graduate header__icon"></i>Dashboard</a>
+                <a href="../auth/dashboard" class="header__logo"><i class="fa-solid fa-user-graduate header__icon"></i>Dashboard</a>
             </div>
             <ul class="header__list">
-                <li class="header__items"><a href="#">Student</a></li>
+                <li class="header__items"><a href="../auth/list">Student</a></li>
                 <li class="header__items"><a href="../course/list">Course</a></li>
                 <li class="header__items"><a href="../question/list">Question</a></li>
                 <li class="header__items"><a href="list">Exam</a></li>

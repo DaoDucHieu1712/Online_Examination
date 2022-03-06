@@ -5,6 +5,7 @@
  */
 package controller.question;
 
+import controller.auth.BaseRequireAuthentication;
 import dao.ICourse;
 import dao.IQuestion;
 import dao.impl.CourseDAO;
@@ -23,7 +24,7 @@ import model.Question;
  *
  * @author ADMIN
  */
-public class InsertQuestionController extends HttpServlet {
+public class InsertQuestionController extends BaseRequireAuthentication {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -61,7 +62,7 @@ public class InsertQuestionController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ICourse course_dao = new CourseDAO();
         ArrayList<Course> list_course = course_dao.list_course();
@@ -78,7 +79,7 @@ public class InsertQuestionController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         IQuestion question_dao = new QuestionDAO();
         Question q = new Question();

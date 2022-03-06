@@ -275,7 +275,7 @@
                 <a href="../dashboard" class="header__logo"><i class="fa-solid fa-user-graduate header__icon"></i>Dashboard</a>
             </div>
             <ul class="header__list">
-                <li class="header__items"><a href="#">Student</a></li>
+                <li class="header__items"><a href="list">Student</a></li>
                 <li class="header__items"><a href="../course/list">Course</a></li>
                 <li class="header__items"><a href="../question/list">Question</a></li>
                 <li class="header__items"><a href="../exam/list">Exam</a></li>
@@ -283,7 +283,7 @@
             </ul>
             <div class="header__account">
                 <c:if test="${sessionScope.account eq null}">
-                    <a href="#account" onclick="show_dropdown()" class="header__user"><i
+                    <a href="#account"  class="header__user"><i
                             class="fa-solid fa-user header__account-icon"></i></a> 
                     </c:if>
                     <c:if test="${sessionScope.account ne null}">

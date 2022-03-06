@@ -5,6 +5,7 @@
  */
 package controller.feedback;
 
+import controller.auth.BaseRequireAuthentication;
 import dao.IFeedback;
 import dao.impl.FeedbackDAO;
 import java.io.IOException;
@@ -18,7 +19,7 @@ import model.Feedback;
  *
  * @author ADMIN
  */
-public class DetailFeedbackController extends HttpServlet {
+public class DetailFeedbackController extends BaseRequireAuthentication {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -49,7 +50,7 @@ public class DetailFeedbackController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -63,7 +64,7 @@ public class DetailFeedbackController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }

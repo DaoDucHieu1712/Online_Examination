@@ -28,7 +28,13 @@ public interface IAccount {
      */
     public void register(Account a);
     
-    public ArrayList<Account> getAllAccount();
+    public ArrayList<Account> getAllAccount(int pageIndex, int pageSize);
+    
+    public ArrayList<Account> getAllAccountByName(String name_search, int pageIndex, int pageSize);
+    
+    public int countAccountByName(String name_search);
+    
+    public int countAccount();
     
     public Account detail(int id);
     

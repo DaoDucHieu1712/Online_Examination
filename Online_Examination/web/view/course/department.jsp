@@ -357,7 +357,7 @@
                 <a href="../auth/dashboard" class="header__logo"><i class="fa-solid fa-user-graduate header__icon"></i>Dashboard</a>
             </div>
             <ul class="header__list">
-                <li class="header__items"><a href="#">Student</a></li>
+                <li class="header__items"><a href="../auth/list">Student</a></li>
                 <li class="header__items"><a href="list">Course</a></li>
                 <li class="header__items"><a href="../question/list">Question</a></li>
                 <li class="header__items"><a href="../exam/list">Exam</a></li>
@@ -365,7 +365,7 @@
             </ul>
             <div class="header__account">
                 <c:if test="${sessionScope.account eq null}">
-                    <a href="../login" onclick="show_dropdown()" class="header__user"><i
+                    <a href="../login"  class="header__user"><i
                             class="fa-solid fa-user header__account-icon"></i></a>
                 </c:if>
                 <c:if test="${sessionScope.account ne null}">
@@ -374,7 +374,7 @@
                 <ul class="header__dropdown">
                     <li class="header__dropdown-items"><a href="../auth/infomation"><i class="fa-solid fa-user-check"></i>infomation</a></li>
                     <li class="header__dropdown-items"><a href="../auth/changepassword"><i class="fa-solid fa-lock"></i>change password</a></li>
-                    <li class="header__dropdown-items"><a href="../logout"><i class="fa-solid fa-right-from-bracket"></i>Logout</>
+                    <li class="header__dropdown-items"><a href="../logout"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
                     </li>
                 </ul>
             </div>

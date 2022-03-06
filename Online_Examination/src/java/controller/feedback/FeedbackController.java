@@ -5,6 +5,7 @@
  */
 package controller.feedback;
 
+import controller.auth.BaseRequireAuthentication;
 import dao.IFeedback;
 import dao.impl.FeedbackDAO;
 import java.io.IOException;
@@ -21,7 +22,7 @@ import model.Feedback;
  *
  * @author ADMIN
  */
-public class FeedbackController extends HttpServlet {
+public class FeedbackController extends BaseRequireAuthentication {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -59,7 +60,7 @@ public class FeedbackController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.getRequestDispatcher("../view/feedback/feedback.jsp").forward(request, response);
     }
@@ -73,7 +74,7 @@ public class FeedbackController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         Account account = (Account) session.getAttribute("account");

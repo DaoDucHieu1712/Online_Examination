@@ -84,7 +84,7 @@ public abstract class BaseRequireAuthentication extends HttpServlet {
         if (isAuthenticated(request)) {
             processGet(request, response);
         } else {
-            response.sendRedirect("access-denied.jsp");
+            response.sendRedirect("../error");
         }
     }
 
@@ -102,7 +102,7 @@ public abstract class BaseRequireAuthentication extends HttpServlet {
         if (isAuthenticated(request)) {
             processPost(request, response);
         } else {
-            response.sendRedirect("access-denied.jsp");
+            response.sendRedirect("../error");
         }
     }
 

@@ -136,12 +136,21 @@ public class AccountDAO extends DBContext implements IAccount {
     }
 
     @Override
-    public ArrayList<Account> getAllAccount() {
+    public ArrayList<Account> getAllAccount(int pageIndex, int pageSize) {
         ArrayList<Account> list_account = new ArrayList<>();
         try {
-            String sql = "SELECT id, full_name, gender, dob, "
-                    + "phone, address FROM Account";
+            String sql = "SELECT * FROM (\n"
+                    + "SELECT ROW_NUMBER() over (order by a.id ASC) as rn,\n"
+                    + "a.id, a.full_name,a.gender, a.dob, a.address, a.phone, a.email\n"
+                    + "FROM Account a inner join Group_Account ga \n"
+                    + "ON a.id = ga.account_id inner join [Group] g\n"
+                    + "ON ga.group_id = g.id Where g.id = 2) as x\n"
+                    + "WHERE rn between (?-1)*? + 1 and ?*?";
             PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, pageIndex);
+            stm.setInt(2, pageSize);
+            stm.setInt(3, pageIndex);
+            stm.setInt(4, pageSize);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Account a = new Account();
@@ -151,6 +160,7 @@ public class AccountDAO extends DBContext implements IAccount {
                 a.setDob(rs.getDate("dob"));
                 a.setPhone(rs.getString("phone"));
                 a.setAddress(rs.getString("address"));
+                a.setEmail(rs.getString("email"));
                 list_account.add(a);
             }
         } catch (SQLException ex) {
@@ -162,7 +172,7 @@ public class AccountDAO extends DBContext implements IAccount {
     @Override
     public Account detail(int id) {
         try {
-            String sql = "SELECT id, full_name, gender, dob, phone, address \n"
+            String sql = "SELECT id, full_name, gender, dob, phone, address, email \n"
                     + "FROM Account where id = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, id);
@@ -176,6 +186,7 @@ public class AccountDAO extends DBContext implements IAccount {
                 a.setDob(rs.getDate("dob"));
                 a.setPhone(rs.getString("phone"));
                 a.setAddress(rs.getString("address"));
+                a.setEmail(rs.getString("email"));
                 return a;
             }
         } catch (SQLException ex) {
@@ -189,7 +200,7 @@ public class AccountDAO extends DBContext implements IAccount {
         try {
             String sql = "DELETE FROM [Account]\n"
                     + "      WHERE id = ?";
-            PreparedStatement stm = connection.prepareCall(sql);
+            PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, id);
             stm.executeUpdate();
         } catch (SQLException ex) {
@@ -209,7 +220,7 @@ public class AccountDAO extends DBContext implements IAccount {
                     + "      ,[email] = ?\n"
                     + "      ,[password] = ?\n"
                     + " WHERE id = ?";
-            
+
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, account.getFull_name());
             stm.setBoolean(2, account.isGender());
@@ -223,5 +234,82 @@ public class AccountDAO extends DBContext implements IAccount {
         } catch (SQLException ex) {
             Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @Override
+    public int countAccount() {
+        String sql = "Select COUNT(a.id) from Account a inner join Group_Account ga \n"
+                + "ON a.id = ga.account_id inner join [Group] g\n"
+                + "ON ga.group_id = g.id Where g.id = 2";
+        int count = 0;
+        try {
+
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
+    }
+
+    @Override
+    public ArrayList<Account> getAllAccountByName(String name_search, int pageIndex, int pageSize) {
+        ArrayList<Account> list_account = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM (\n"
+                    + "SELECT ROW_NUMBER() over (order by a.id ASC) as rn,\n"
+                    + "a.id, a.full_name,a.gender, a.dob, a.address, a.phone, a.email\n"
+                    + "FROM Account a inner join Group_Account ga \n"
+                    + "ON a.id = ga.account_id inner join [Group] g\n"
+                    + "ON ga.group_id = g.id \n"
+                    + "Where g.id = 2 and a.full_name like '%' + ? + '%' ) as x\n"
+                    + "WHERE rn between (?-1)*? + 1 and ?*?";
+
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, name_search);
+            stm.setInt(2, pageIndex);
+            stm.setInt(3, pageSize);
+            stm.setInt(4, pageIndex);
+            stm.setInt(5, pageSize);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Account a = new Account();
+                a.setId(rs.getInt("id"));
+                a.setFull_name(rs.getString("full_name"));
+                a.setGender(rs.getBoolean("gender"));
+                a.setDob(rs.getDate("dob"));
+                a.setPhone(rs.getString("phone"));
+                a.setAddress(rs.getString("address"));
+                a.setEmail(rs.getString("email"));
+                list_account.add(a);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list_account;
+    }
+
+    @Override
+    public int countAccountByName(String name_search) {
+        String sql = "Select COUNT(a.id) from Account a inner join Group_Account ga \n"
+                + "ON a.id = ga.account_id inner join [Group] g\n"
+                + "ON ga.group_id = g.id Where g.id = 2 and a.full_name like '%' + ? + '%'";
+        int count = 0;
+        try {
+
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, name_search);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AccountDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return count;
     }
 }
