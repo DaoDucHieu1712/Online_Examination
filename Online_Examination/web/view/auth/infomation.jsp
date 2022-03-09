@@ -130,12 +130,12 @@
             .header__dropdown a {
                 color: white;
             }
-            .header__dropdown-items:not(:last-child) {
+            .header__dropdown-items {
                 padding: 10px;
                 font-size: 1.4rem;
                 transition: 0.25s linear;
             }
-            .header__dropdown-items:not(:last-child):hover {
+            .header__dropdown-items:hover {
                 background-color: rgba(14, 181, 130, 0.9);
             }
 

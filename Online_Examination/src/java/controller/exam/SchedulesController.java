@@ -3,24 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.auth;
+package controller.exam;
 
-import dao.IAccount;
-import dao.impl.AccountDAO;
+import dao.ICourse;
+import dao.IExam;
+import dao.impl.CourseDAO;
+import dao.impl.ExamDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import model.Account;
+import model.Course;
+import model.Exam;
 
 /**
  *
  * @author ADMIN
  */
-public class loginController extends HttpServlet {
+public class SchedulesController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,18 +39,23 @@ public class loginController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet loginController</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet loginController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String name_search = request.getParameter("name_search");
+        IExam exam_dao = new ExamDAO();
+        ICourse course_dao = new CourseDAO();
+        if(name_search == null){
+            name_search= "";
         }
+        ArrayList<Course> list_course = course_dao.list_course();
+        ArrayList<Exam> list_exam = new ArrayList<>();
+        if(name_search.length() == 0){
+            list_exam = exam_dao.getListSchedules();
+        }else{
+            list_exam = exam_dao.getListSchedulesByNameSearch(name_search);
+        }
+        request.setAttribute("list_course", list_course);
+        request.setAttribute("list_exam", list_exam);
+        request.setAttribute("name_search", name_search);
+        request.getRequestDispatcher("../view/exam/schedules.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -60,7 +70,7 @@ public class loginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("view/auth/login.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -74,23 +84,7 @@ public class loginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String email = request.getParameter("email").trim();
-        String password = request.getParameter("password").trim();
-        IAccount iAccount = new AccountDAO();
-        Account account = iAccount.getAccount(email, password);
-        HttpSession session = request.getSession();
-        if (account == null) {
-            request.setAttribute("notify", "Email hoặc mật khẩu không đúng !");
-            request.getRequestDispatcher("view/auth/login.jsp").forward(request, response);
-        } else {
-            if (account.getGroup().getId() == 1) {
-                session.setAttribute("account", account);
-                response.sendRedirect("auth/dashboard");
-            } else {
-                session.setAttribute("account", account);
-                response.sendRedirect("auth/home");
-            }
-        }
+        processRequest(request, response);
     }
 
     /**

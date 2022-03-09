@@ -131,12 +131,12 @@
             .header__dropdown a {
                 color: white;
             }
-            .header__dropdown-items:not(:last-child) {
+            .header__dropdown-items {
                 padding: 10px;
                 font-size: 1.4rem;
                 transition: 0.25s linear;
             }
-            .header__dropdown-items:not(:last-child):hover {
+            .header__dropdown-items:hover {
                 background-color: rgba(14, 181, 130, 0.9);
             }
 
@@ -293,7 +293,7 @@
                 <ul class="header__dropdown">
                     <li class="header__dropdown-items"><a href="infomation"><i class="fa-solid fa-user-check"></i>infomation</a></li>
                     <li class="header__dropdown-items"><a href="changepassword"><i class="fa-solid fa-lock"></i>change password</a></li>
-                    <li class="header__dropdown-items"><a href="../logout"><i class="fa-solid fa-right-from-bracket"></i>Logout</>
+                    <li class="header__dropdown-items"><a href="../logout"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
                     </li>
                 </ul>
             </div>

@@ -1,6 +1,6 @@
 <%-- 
-    Document   : list
-    Created on : Mar 2, 2022, 11:00:52 PM
+    Document   : schedules
+    Created on : Mar 8, 2022, 10:32:18 AM
     Author     : ADMIN
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -32,116 +32,94 @@
                 height: 100vh;
             }
 
+            a {
+                color: #555;
+            }
+
             .header {
-                width: 100%;
                 position: fixed;
                 top: 0;
                 left: 0;
-                font-size: 1.8rem;
+                width: 100%;
+                background-color: white;
+                color: #555;
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-                padding: 20px;
-                background-color: white;
-                box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.233);
-                z-index: 2;
-            }
-            .header__logo {
-                font-size: 2rem;
-                text-transform: uppercase;
-                font-weight: bold;
-                transition: 0.25 linear;
-                color: #0eb582;
-            }
-            .header__logo:hover {
-                color: #0eb582;
-            }
-            .header__name {
+                padding: 25px;
                 font-size: 1.6rem;
                 font-weight: bold;
+                box-shadow: 0 0 3px 4px #eee;
+                z-index: 100000;
             }
-            .header__name i {
-                margin-left: 5px;
-                cursor: pointer;
+            .header__logo {
+                font-size: 2.2rem;
             }
             .header__bar {
+                margin-right: 50px;
                 font-size: 2rem;
-                margin-right: 100px;
-                padding: 10px 11px;
-                background-color: #eee;
+                background-color: #ccc;
                 border-radius: 50%;
-                border: 2px solid #999;
-                transition: 0.45s linear;
+                padding: 10px 11px;
                 cursor: pointer;
+                transition: 0.25s linear;
             }
             .header__bar:hover {
                 transform: rotate(180deg);
-                background-color: rgba(153, 153, 153, 0.562);
-            }
-            .header__icon {
-                margin-right: 5px;
-            }
-            .header a {
-                color: black;
             }
             .header__list {
                 display: flex;
             }
             .header__items {
                 margin: 0 15px;
-                font-weight: bold;
-            }
-            .header__items a {
                 transition: 0.25s linear;
+            }
+            .header__items:hover {
+                font-size: 1.5rem;
             }
             .header__items a:hover {
-                font-size: 1.7rem;
-                color: #0eb582;
-            }
-            .header__user {
-                margin-right: 15rem;
-                transition: 0.25s linear;
-            }
-            .header__user:hover {
                 color: #0eb582;
             }
             .header__account {
                 position: relative;
+                padding-right: 100px;
+            }
+            .header__account i {
+                cursor: pointer;
             }
             .header__dropdown {
-                width: 200px;
-                padding: 5px;
-                border-radius: 5px;
                 position: absolute;
-                top: 45px;
-                left: 0;
-                background-color: rgba(14, 181, 130, 0.7);
+                width: 250px;
+                left: -20px;
+                top: 40px;
+                border-radius: 1rem;
+                padding: 10px;
+                background-color: rgba(14, 181, 130, 0.5);
                 opacity: 0;
                 visibility: hidden;
                 transition: 0.25s linear;
             }
-            .header__dropdown i {
-                margin-right: 11px;
+            .header__dropdown-items {
+                padding: 8px;
+                margin-bottom: 8px;
+                transition: 0.25s linear;
+                font-size: 1.3rem;
             }
-            .header__dropdown.droppdown-ishow {
+            .header__dropdown-items:hover {
+                background-color: rgba(14, 181, 130, 0.9);
+            }
+            .header__dropdown-items i {
+                margin-right: 8px;
+            }
+
+            .is-show {
                 opacity: 1;
                 visibility: visible;
-            }
-            .header__dropdown a {
-                color: white;
-            }
-            .header__dropdown-items:not(:last-child) {
-                padding: 10px;
-                font-size: 1.4rem;
-                transition: 0.25s linear;
-            }
-            .header__dropdown-items:not(:last-child):hover {
-                background-color: rgba(14, 181, 130, 0.9);
             }
 
             .sidebar {
                 position: fixed;
-                top: 85px;
+                top: 90px;
                 left: 0;
                 background-color: white;
                 height: 100vh;
@@ -193,8 +171,7 @@
                 color: #0eb582;
             }
 
-            /*# sourceMappingURL=dashboard.css.map */
-
+            /*# sourceMappingURL=home.css.map */
             button,
             input,
             textarea,
@@ -205,7 +182,7 @@
             .section {
                 margin: 150px auto;
                 width: 1000px;
-                min-height: 600px;
+                height: 600px;
                 background-color: white;
                 box-shadow: 0 0 3px 6px rgba(0, 0, 0, 0.151);
                 transform: translateX(100px);
@@ -321,6 +298,19 @@
                 color: #555;
             }
 
+            .section__link {
+                padding: 5px 8px;
+                color: #555;
+                border-radius: 5px;
+                border: 2px solid #0eb582;
+                font-weight: bold;
+                transition: 0.25s linear;
+            }
+            .section__link:hover {
+                background-color: #0eb582;
+                color: white;
+            }
+
             .pagger {
                 margin-top: 35px;
                 font-size: 1.6rem;
@@ -362,30 +352,21 @@
 
             /*# sourceMappingURL=list-course.css.map */
 
-            /*# sourceMappingURL=exam-list.css.map */
+            /*# sourceMappingURL=schedules.css.map */
 
         </style>
-        <script>
-            function do_delete(id) {
-                var a = confirm('Do you want to delete ? ');
-                if (a === true) {
-                    window.location.href = "delete?id=" + id;
-                }
-            }
-        </script>
     </head>
     <body>
         <header class="header">
-            <div class="header__dashboard">
+            <div class="header__home">
                 <i class="fa-solid fa-bars header__bar"></i>
-                <a href="../auth/dashboard" class="header__logo"><i class="fa-solid fa-user-graduate header__icon"></i>Dashboard</a>
+                <a href="#home" class="header__logo"><i class="fa-solid fa-user-graduate header__icon"></i>Exam.</a>
             </div>
             <ul class="header__list">
-                <li class="header__items"><a href="../auth/list">Student</a></li>
-                <li class="header__items"><a href="../course/list">Course</a></li>
-                <li class="header__items"><a href="../question/list">Question</a></li>
-                <li class="header__items"><a href="list">Exam</a></li>
-                <li class="header__items"><a href="../feedback/list">Feedback</a></li>
+                <li class="header__items"><a href="home">Home</a></li>
+                <li class="header__items"><a href="#">About</a></li>
+                <li class="header__items"><a href="schedules">Exam Schedules</a></li>
+                <li class="header__items"><a href="../feedback/insert">Feedback</a></li>
             </ul>
             <div class="header__account">
                 <c:if test="${sessionScope.account eq null}">
@@ -399,23 +380,24 @@
                 <ul class="header__dropdown">
                     <li class="header__dropdown-items"><a href="../auth/infomation"><i class="fa-solid fa-user-check"></i>infomation</a></li>
                     <li class="header__dropdown-items"><a href="../auth/changepassword"><i class="fa-solid fa-lock"></i>change password</a></li>
-                    <li class="header__dropdown-items"><a href="../logout"><i class="fa-solid fa-right-from-bracket"></i>Logout</>
+                    <li class="header__dropdown-items"><a href="../logout"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
                     </li>
                 </ul>
             </div>
         </header>
+
         <div class="sidebar sidebar-show">
-            <h2 class="sidebar__heading">Exam Manager</h2>
+            <h2 class="sidebar__heading">Course</h2>
             <ul class="sidebar__list">
                 <c:forEach items="${list_course}" var="c">
-                    <li class="sidebar__items"><a href="course?cid=${c.id}">${c.name}<i class="fa-solid fa-caret-right"></i></a></li>
+                    <li class="sidebar__items"><a href="schedulesCID?cid=${c.id}">${c.name}<i class="fa-solid fa-caret-right"></i></a></li>
                         </c:forEach>
             </ul>
         </div>
 
         <div class="section">
             <div class="section__search">
-                <form action="list" method="GET">
+                <form action="schedules" method="GET">
                     <input type="text" name="name_search" value="${name_search}" class="section__input" placeholder="search ...">
                     <button type="submit" class="section__submit">Search</button>
                 </form>
@@ -424,7 +406,7 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <!--<th>ID</th>-->
                             <th>Name Exam</th>
                             <th>Time</th>
                             <th>Quantity</th>
@@ -436,76 +418,27 @@
                     </thead>
                     <tbody>
                         <c:forEach items="${list_exam}" var="e">
-                            <tr>
-                                <td>${e.id}</td>
-                                <td>${e.name_exam}</td>
-                                <td>${e.time}</td>
-                                <td>${e.quantity_quiz}</td>
-                                <td>${e.course.name}</td>
-                                <td>${e.date_start}</td>
-                                <td>${e.date_end}</td>
-                                <td>
-                                    <a href="detail?id=${e.id}"><i class="fa fa-file section__icon"></i></a>
-                                    <a href="update?id=${e.id}"><i class="fa fa-edit section__icon"></i></a>
-                                    <a onclick="do_delete(${e.id})"><i class="fa fa-trash section__icon"></i></a>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <!--<td>1</td>-->
+                                    <td>${e.name_exam}</td>
+                                    <td>${e.time}</td>
+                                    <td>${e.quantity_quiz}</td>
+                                    <td>${e.course.name}</td>
+                                    <td>${e.date_start}</td>
+                                    <td>${e.date_end}</td>
+                                    <td>
+                                        <a  class="section__link" href="doExam?course=${e.course.id}&time=${e.time}&quantity=${e.quantity_quiz}">Do exam</a>
+                                    </td>
+                                </tr>
                         </c:forEach>
                     </tbody>
                 </table>
-                <span class="section__insert">Click here is <a href="insert">Create Exam</a></span>
-                <c:if test="${maxPage > 1}">
-                    <div id="pagination" class="pagger"></div>
-                </c:if>
             </div>
-
         </div>
-
         <script>
             function show_dropdown() {
-                document.querySelector('.header__dropdown').classList.toggle('droppdown-ishow');
+                document.querySelector('.header__dropdown').classList.toggle('is-show');
             }
-
-            function generate(div, pageIndex, maxPage, gap) {
-                var container = document.getElementById(div);
-//                    if (pageIndex - gap > 1)
-                container.innerHTML += '<a href="list?pageIndex=1">First</a>';
-                for (var i = pageIndex - gap; i < pageIndex; i++) {
-                    if (i > 0)
-                        container.innerHTML += '<a href="list?pageIndex=' + i + '">' + i + '</a>';
-                }
-                container.innerHTML += '<span>' + pageIndex + '</span>';
-                for (var i = pageIndex + 1; i <= pageIndex + gap; i++) {
-                    if (i <= maxPage)
-                        container.innerHTML += '<a href="list?pageIndex=' + i + '">' + i + '</a>';
-                }
-//                    if (maxPage + gap < maxPage)
-                container.innerHTML += '<a href="list?pageIndex=' + maxPage + '">Last</a>';
-            }
-
-            function generateBySearchName(div, pageIndex, maxPage, gap, name_search) {
-                var container = document.getElementById(div);
-//                    if (pageIndex - gap > 1)
-                container.innerHTML += '<a href="list?name_search=' + name_search + '&pageIndex=1">First</a>';
-                for (var i = pageIndex - gap; i < pageIndex; i++) {
-                    if (i > 0)
-                        container.innerHTML += '<a href="list?name_search=' + name_search + '&pageIndex=' + i + '">' + i + '</a>';
-                }
-                container.innerHTML += '<span>' + pageIndex + '</span>';
-                for (var i = pageIndex + 1; i <= pageIndex + gap; i++) {
-                    if (i <= maxPage)
-                        container.innerHTML += '<a href="list?name_search=' + name_search + '&pageIndex=' + i + '">' + i + '</a>';
-                }
-//                    if (maxPage + gap < maxPage)
-                container.innerHTML += '<a href="list?name_search=' + name_search + '&pageIndex=' + maxPage + '">Last</a>';
-            }
-
-            if (${name_search.length()} === 0) {
-                generate('pagination', ${pageIndex}, ${maxPage}, 2);
-            } else {
-                generateBySearchName('pagination',${pageIndex},${maxPage}, 2, '${name_search}');
-            }
-
         </script>
     </body>
 </html>

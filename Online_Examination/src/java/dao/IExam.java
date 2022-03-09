@@ -22,6 +22,10 @@ public interface IExam {
     
     public ArrayList<Exam> getListExamByNameSearchAndCourseId(String name_search, int course_id, int pageIndex, int pageSize);
     
+    public ArrayList<Exam> getListSchedules();
+    
+    public ArrayList<Exam> getListSchedulesByNameSearch(String name_search);
+    
     public int countAllExam();
     
     public int countExamBySearch(String name_search);

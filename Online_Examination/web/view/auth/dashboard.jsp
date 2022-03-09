@@ -151,11 +151,11 @@
                 <li class="header__items"><a href="../course/list">Course</a></li>
                 <li class="header__items"><a href="../question/list">Question</a></li>
                 <li class="header__items"><a href="../exam/list">Exam</a></li>
-                <li class="header__items"><a href="../feedback">Feedback</a></li>
+                <li class="header__items"><a href="../feedback/list">Feedback</a></li>
             </ul>
             <div class="header__account">
                 <c:if test="${sessionScope.account eq null}">
-                    <a href="#account"  class="header__user"><i
+                    <a href="../login"  class="header__user"><i
                             class="fa-solid fa-user header__account-icon"></i></a> 
                 </c:if>
                 <c:if test="${sessionScope.account ne null}">

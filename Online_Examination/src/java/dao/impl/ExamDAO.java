@@ -365,4 +365,71 @@ public class ExamDAO extends DBContext implements IExam {
         return count;
     }
 
+    @Override
+    public ArrayList<Exam> getListSchedules() {
+        ArrayList<Exam> list_exam = new ArrayList<>();
+        try {
+            String sql = "SELECT e.id, e.name_exam, e.time, e.quantity_quiz, e.date_start, e.date_end,\n"
+                    + "c.id as cid ,c.name as cname,c.display_name \n"
+                    + "FROM Exam e inner join Course c\n"
+                    + "ON e.course_id = c.id WHERE GETDATE() > e.date_start AND GETDATE() < e.date_end";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                Exam e = new Exam();
+                e.setId(rs.getInt("id"));
+                e.setName_exam(rs.getString("name_exam"));
+                e.setTime(rs.getInt("time"));
+                e.setQuantity_quiz(rs.getInt("quantity_quiz"));
+                e.setDate_start(rs.getDate("date_start"));
+                e.setDate_end(rs.getDate("date_end"));
+                Course c = new Course();
+                c.setId(rs.getInt("cid"));
+                c.setName(rs.getString("cname"));
+                c.setDisplay_name(rs.getString("display_name"));
+                e.setCourse(c);
+                list_exam.add(e);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ExamDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list_exam;
+
+    }
+
+    @Override
+    public ArrayList<Exam> getListSchedulesByNameSearch(String name_search) {
+        ArrayList<Exam> list_exam = new ArrayList<>();
+        try {
+            String sql = "SELECT e.id, e.name_exam, e.time, e.quantity_quiz, e.date_start, e.date_end,\n"
+                    + "c.id as cid ,c.name as cname,c.display_name \n"
+                    + "FROM Exam e inner join Course c\n"
+                    + "ON e.course_id = c.id WHERE GETDATE() > e.date_start AND GETDATE() < e.date_end AND e.name_exam LIKE '%' + ? + '%'";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, name_search);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Exam e = new Exam();
+                e.setId(rs.getInt("id"));
+                e.setName_exam(rs.getString("name_exam"));
+                e.setTime(rs.getInt("time"));
+                e.setQuantity_quiz(rs.getInt("quantity_quiz"));
+                e.setDate_start(rs.getDate("date_start"));
+                e.setDate_end(rs.getDate("date_end"));
+                Course c = new Course();
+                c.setId(rs.getInt("cid"));
+                c.setName(rs.getString("cname"));
+                c.setDisplay_name(rs.getString("display_name"));
+                e.setCourse(c);
+                list_exam.add(e);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ExamDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list_exam;
+    }
+
 }

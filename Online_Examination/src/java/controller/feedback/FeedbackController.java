@@ -85,7 +85,7 @@ public class FeedbackController extends BaseRequireAuthentication {
         f.setTitle(request.getParameter("title"));
         f.setMassage(request.getParameter("massage"));
         feedback_dao.insert(f);
-        response.sendRedirect("list");
+        response.sendRedirect("../auth/home");
     }
 
     /**

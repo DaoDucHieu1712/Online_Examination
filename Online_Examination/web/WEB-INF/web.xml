@@ -132,6 +132,10 @@
         <servlet-name>ErorrController</servlet-name>
         <servlet-class>controller.auth.ErorrController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SchedulesController</servlet-name>
+        <servlet-class>controller.exam.SchedulesController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>loginController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -263,6 +267,10 @@
     <servlet-mapping>
         <servlet-name>ErorrController</servlet-name>
         <url-pattern>/error</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SchedulesController</servlet-name>
+        <url-pattern>/exam/schedules</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
