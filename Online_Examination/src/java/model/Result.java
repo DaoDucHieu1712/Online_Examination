@@ -10,35 +10,36 @@ package model;
  * @author ADMIN
  */
 public class Result {
-    private int account_id;
-    private int exam_id;
+
+    private Account account;
+    private Exam exam;
     private float score;
     private String status;
 
     public Result() {
     }
 
-    public Result(int account_id, int exam_id, float score, String status) {
-        this.account_id = account_id;
-        this.exam_id = exam_id;
+    public Result(Account account, Exam exam, float score, String status) {
+        this.account = account;
+        this.exam = exam;
         this.score = score;
         this.status = status;
     }
 
-    public int getAccount_id() {
-        return account_id;
+    public Account getAccount() {
+        return account;
     }
 
-    public void setAccount_id(int account_id) {
-        this.account_id = account_id;
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
-    public int getExam_id() {
-        return exam_id;
+    public Exam getExam() {
+        return exam;
     }
 
-    public void setExam_id(int exam_id) {
-        this.exam_id = exam_id;
+    public void setExam(Exam exam) {
+        this.exam = exam;
     }
 
     public float getScore() {
@@ -56,7 +57,5 @@ public class Result {
     public void setStatus(String status) {
         this.status = status;
     }
-    
-    
-    
+
 }

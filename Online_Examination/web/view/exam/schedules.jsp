@@ -360,10 +360,10 @@
         <header class="header">
             <div class="header__home">
                 <i class="fa-solid fa-bars header__bar"></i>
-                <a href="#home" class="header__logo"><i class="fa-solid fa-user-graduate header__icon"></i>Exam.</a>
+                <a href="../auth/home" class="header__logo"><i class="fa-solid fa-user-graduate header__icon"></i>Exam.</a>
             </div>
             <ul class="header__list">
-                <li class="header__items"><a href="home">Home</a></li>
+                <li class="header__items"><a href="../auth/home">Home</a></li>
                 <li class="header__items"><a href="#">About</a></li>
                 <li class="header__items"><a href="schedules">Exam Schedules</a></li>
                 <li class="header__items"><a href="../feedback/insert">Feedback</a></li>
@@ -427,7 +427,7 @@
                                     <td>${e.date_start}</td>
                                     <td>${e.date_end}</td>
                                     <td>
-                                        <a  class="section__link" href="doExam?course=${e.course.id}&time=${e.time}&quantity=${e.quantity_quiz}">Do exam</a>
+                                        <a  class="section__link" href="startExam?exam=${e.id}&course=${e.course.id}&time=${e.time}&quantity=${e.quantity_quiz}">Do exam</a>
                                     </td>
                                 </tr>
                         </c:forEach>
