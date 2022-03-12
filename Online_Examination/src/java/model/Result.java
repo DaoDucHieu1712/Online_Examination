@@ -10,7 +10,8 @@ package model;
  * @author ADMIN
  */
 public class Result {
-
+    
+    private int id;
     private Account account;
     private Exam exam;
     private float score;
@@ -19,11 +20,20 @@ public class Result {
     public Result() {
     }
 
-    public Result(Account account, Exam exam, float score, String status) {
+    public Result(int id, Account account, Exam exam, float score, String status) {
+        this.id = id;
         this.account = account;
         this.exam = exam;
         this.score = score;
         this.status = status;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Account getAccount() {
@@ -57,5 +67,7 @@ public class Result {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    
 
 }

@@ -5,6 +5,7 @@
  */
 package controller.exam;
 
+import controller.auth.BaseRequireAuthentication;
 import dao.IExam;
 import dao.IResult;
 import dao.impl.ExamDAO;
@@ -25,7 +26,7 @@ import model.Result;
  *
  * @author ADMIN
  */
-public class doExamController extends HttpServlet {
+public class doExamController extends BaseRequireAuthentication {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -98,7 +99,7 @@ public class doExamController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -112,7 +113,7 @@ public class doExamController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }

@@ -152,6 +152,7 @@
                 <li class="header__items"><a href="../question/list">Question</a></li>
                 <li class="header__items"><a href="../exam/list">Exam</a></li>
                 <li class="header__items"><a href="../feedback/list">Feedback</a></li>
+                <li class="header__items"><a href="../result/list">Result</a></li>
             </ul>
             <div class="header__account">
                 <c:if test="${sessionScope.account eq null}">

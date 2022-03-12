@@ -269,35 +269,71 @@
         </style>
     </head>
     <body>
-        <header class="header">
-            <div class="header__dashboard">
-                <i class="fa-solid fa-bars header__bar"></i>
-                <a href="../dashboard" class="header__logo"><i class="fa-solid fa-user-graduate header__icon"></i>Dashboard</a>
-            </div>
-            <ul class="header__list">
-                <li class="header__items"><a href="list">Student</a></li>
-                <li class="header__items"><a href="../course/list">Course</a></li>
-                <li class="header__items"><a href="../question/list">Question</a></li>
-                <li class="header__items"><a href="../exam/list">Exam</a></li>
-                <li class="header__items"><a href="../feedback/list">Feedback</a></li>
-            </ul>
-            <div class="header__account">
-                <c:if test="${sessionScope.account eq null}">
-                    <a href="#account"  class="header__user"><i
-                            class="fa-solid fa-user header__account-icon"></i></a> 
-                    </c:if>
-                    <c:if test="${sessionScope.account ne null}">
-                    <span class="header__name">${sessionScope.account.full_name}<i onclick="show_dropdown()"
-                                                                                   class="fa-solid fa-caret-down"></i></span>
-                    </c:if>
-                <ul class="header__dropdown">
-                    <li class="header__dropdown-items"><a href="infomation"><i class="fa-solid fa-user-check"></i>infomation</a></li>
-                    <li class="header__dropdown-items"><a href="changepassword"><i class="fa-solid fa-lock"></i>change password</a></li>
-                    <li class="header__dropdown-items"><a href="../logout"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
-                    </li>
+
+        <c:if test="${sessionScope.account.group.id == 1}">
+            <header class="header">
+                <div class="header__dashboard">
+                    <i class="fa-solid fa-bars header__bar"></i>
+                    <a href="../dashboard" class="header__logo"><i class="fa-solid fa-user-graduate header__icon"></i>Dashboard</a>
+                </div>
+                <ul class="header__list">
+                    <li class="header__items"><a href="list">Student</a></li>
+                    <li class="header__items"><a href="../course/list">Course</a></li>
+                    <li class="header__items"><a href="../question/list">Question</a></li>
+                    <li class="header__items"><a href="../exam/list">Exam</a></li>
+                    <li class="header__items"><a href="../feedback/list">Feedback</a></li>
+                    <li class="header__items"><a href="../result/list">Result</a></li>
                 </ul>
-            </div>
-        </header>
+                <div class="header__account">
+                    <c:if test="${sessionScope.account eq null}">
+                        <a href="../login"  class="header__user"><i
+                                class="fa-solid fa-user header__account-icon"></i></a> 
+                        </c:if>
+                        <c:if test="${sessionScope.account ne null}">
+                        <span class="header__name">${sessionScope.account.full_name}<i onclick="show_dropdown()"
+                                                                                       class="fa-solid fa-caret-down"></i></span>
+                        </c:if>
+                    <ul class="header__dropdown">
+                        <li class="header__dropdown-items"><a href="infomation"><i class="fa-solid fa-user-check"></i>infomation</a></li>
+                        <li class="header__dropdown-items"><a href="changepassword"><i class="fa-solid fa-lock"></i>change password</a></li>
+                        <li class="header__dropdown-items"><a href="../logout"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+        </c:if>
+
+        <c:if test="${sessionScope.account.group.id == 2}">
+            <header class="header">
+                <div class="header__dashboard">
+                    <i class="fa-solid fa-bars header__bar"></i>
+                    <a href="home" class="header__logo"><i class="fa-solid fa-user-graduate header__icon"></i>Exam.</a>
+                </div>
+                <ul class="header__list">
+                    <li class="header__items"><a href="home">Home</a></li>
+                    <li class="header__items"><a href="about">About</a></li>
+                    <li class="header__items"><a href="../exam/schedules">Exam Schedules</a></li>
+                    <li class="header__items"><a href="../feedback/insert">Feedback</a></li>
+                </ul>
+                <div class="header__account">
+                    <c:if test="${sessionScope.account eq null}">
+                        <a href="../login"  class="header__user"><i
+                                class="fa-solid fa-user header__account-icon"></i></a> 
+                        </c:if>
+                        <c:if test="${sessionScope.account ne null}">
+                        <span class="header__name">${sessionScope.account.full_name}<i onclick="show_dropdown()"
+                                                                                       class="fa-solid fa-caret-down"></i></span>
+                        </c:if>
+                    <ul class="header__dropdown">
+                        <li class="header__dropdown-items"><a href="infomation"><i class="fa-solid fa-user-check"></i>infomation</a></li>
+                        <li class="header__dropdown-items"><a href="changepassword"><i class="fa-solid fa-lock"></i>change password</a></li>
+                        <li class="header__dropdown-items"><a href="../logout"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </header>
+        </c:if>
+
         <div class="sidebar">
             <img src="http://127.0.0.1:5500/image/image/teacher-5.png" alt="">
             <span>${sessionScope.account.full_name}</span>
