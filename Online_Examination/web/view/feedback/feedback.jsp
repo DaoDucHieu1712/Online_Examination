@@ -288,9 +288,9 @@
                 <a href="../auth/dashboard" class="header__logo"><i class="fa-solid fa-graduation-cap"></i></i>ExamOnline</a>
             </div>
             <ul class="header__list">
-                <li class="header__items"><a href="home">Home</a></li>
-                <li class="header__items"><a href="#">About</a></li>
-                <li class="header__items"><a href="#">Exam Schedules</a></li>
+                <li class="header__items"><a href="../auth/home">Home</a></li>
+                <li class="header__items"><a href="../auth/homr">About</a></li>
+                <li class="header__items"><a href="../exam/schedules">Exam Schedules</a></li>
                 <li class="header__items"><a href="feedback">Feedback</a></li>
             </ul>
             <div class="header__account">

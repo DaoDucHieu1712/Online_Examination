@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <filter>
+        <filter-name>AuthenticationFilter</filter-name>
+        <filter-class>filter.AuthenticationFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <servlet-name>DashBoardController</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <servlet-name>HomeController</servlet-name>
+    </filter-mapping>
     <servlet>
         <servlet-name>loginController</servlet-name>
         <servlet-class>controller.auth.loginController</servlet-class>
@@ -144,6 +156,18 @@
         <servlet-name>doExamController</servlet-name>
         <servlet-class>controller.exam.doExamController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListResultController</servlet-name>
+        <servlet-class>controller.result.ListResultController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ResultAccountController</servlet-name>
+        <servlet-class>controller.result.ResultAccountController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ResultCourseController</servlet-name>
+        <servlet-class>controller.result.ResultCourseController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>loginController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -287,6 +311,18 @@
     <servlet-mapping>
         <servlet-name>doExamController</servlet-name>
         <url-pattern>/exam/doExam</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListResultController</servlet-name>
+        <url-pattern>/result/list</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResultAccountController</servlet-name>
+        <url-pattern>/result/account</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResultCourseController</servlet-name>
+        <url-pattern>/result/course</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -10,6 +10,7 @@ import dao.impl.AccountDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -76,6 +77,7 @@ public class loginController extends HttpServlet {
             throws ServletException, IOException {
         String email = request.getParameter("email").trim();
         String password = request.getParameter("password").trim();
+        Boolean remember = Boolean.parseBoolean(request.getParameter("remember"));
         IAccount iAccount = new AccountDAO();
         Account account = iAccount.getAccount(email, password);
         HttpSession session = request.getSession();
@@ -85,9 +87,25 @@ public class loginController extends HttpServlet {
         } else {
             if (account.getGroup().getId() == 1) {
                 session.setAttribute("account", account);
+                if (remember == true) {
+                    Cookie usernameCookie = new Cookie("email", email);
+                    usernameCookie.setMaxAge(3600 * 24 * 24 * 365);
+                    Cookie pwCookie = new Cookie("password", password);
+                    pwCookie.setMaxAge(3600 * 24 * 24 * 365);
+                    response.addCookie(usernameCookie);
+                    response.addCookie(pwCookie);
+                }
                 response.sendRedirect("auth/dashboard");
             } else {
                 session.setAttribute("account", account);
+                if (remember == true) {
+                    Cookie usernameCookie = new Cookie("email", email);
+                    usernameCookie.setMaxAge(3600 * 24 * 24 * 365);
+                    Cookie pwCookie = new Cookie("password", password);
+                    pwCookie.setMaxAge(3600 * 24 * 24 * 365);
+                    response.addCookie(usernameCookie);
+                    response.addCookie(pwCookie);
+                }
                 response.sendRedirect("auth/home");
             }
         }

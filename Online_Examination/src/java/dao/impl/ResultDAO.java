@@ -203,7 +203,7 @@ public class ResultDAO extends DBContext implements IResult {
                     + "FROM Result r inner join Account a\n"
                     + "ON r.account_id = a.id inner join Exam e\n"
                     + "ON r.exam_id = e.id inner join Course c\n"
-                    + "ON e.course_id = c.id WHERE a.id = ?) as x\n"
+                    + "ON e.course_id = c.id WHERE a.id = ? and e.name_exam like '%' + ? + '%') as x\n"
                     + "WHERE rn between (?-1)* ? + 1 and ?*?";
 
             PreparedStatement stm = connection.prepareStatement(sql);

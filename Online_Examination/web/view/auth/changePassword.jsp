@@ -337,7 +337,9 @@
         <div class="sidebar">
             <img src="http://127.0.0.1:5500/image/image/teacher-5.png" alt="">
             <span>${sessionScope.account.full_name}</span>
-            <a href="#"><i class="fa-solid fa-square-poll-vertical"></i>Result</a>
+            <c:if test="${sessionScope.account.group.id == 2}">
+                <a href="../result/account?aid=${sessionScope.account.id}"><i class="fa-solid fa-square-poll-vertical"></i>Result</a>
+            </c:if>
         </div>
         <div class="section">
             <div class="section_info">
