@@ -209,7 +209,7 @@
             </div>
             <ul class="header__list">
                 <li class="header__items"><a href="home">Home</a></li>
-                <li class="header__items"><a href="about">About</a></li>
+                <li class="header__items"><a href="home">About</a></li>
                 <li class="header__items"><a href="../exam/schedules">Exam Schedules</a></li>
                 <li class="header__items"><a href="../feedback/insert">Feedback</a></li>
             </ul>

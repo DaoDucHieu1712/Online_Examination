@@ -130,12 +130,12 @@
             .header__dropdown a {
                 color: white;
             }
-            .header__dropdown-items:not(:last-child) {
+            .header__dropdown-items {
                 padding: 10px;
                 font-size: 1.4rem;
                 transition: 0.25s linear;
             }
-            .header__dropdown-items:not(:last-child):hover {
+            .header__dropdown-items:hover {
                 background-color: rgba(14, 181, 130, 0.9);
             }
             body {
@@ -247,7 +247,7 @@
                             class="fa-solid fa-user header__account-icon"></i></a> 
                     </c:if>
                     <c:if test="${sessionScope.account ne null}">
-                    <span class="header__name">${sessionScope.account.full_name}<i onclick="show_dropdown()" class="fa-solid fa-caret-down"></i></span>
+                        <span class="header__name" style="margin-left: 120px">${sessionScope.account.full_name}<i onclick="show_dropdown()" class="fa-solid fa-caret-down"></i></span>
                     </c:if>
                 <ul class="header__dropdown">
                     <li class="header__dropdown-items"><a href="infomation"><i class="fa-solid fa-user-check"></i>infomation</a></li>

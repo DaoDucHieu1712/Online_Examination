@@ -185,7 +185,6 @@
                 height: 600px;
                 background-color: white;
                 box-shadow: 0 0 3px 6px rgba(0, 0, 0, 0.151);
-                transform: translateX(100px);
                 border-radius: 2rem;
                 padding: 50px;
             }
@@ -364,7 +363,7 @@
             </div>
             <ul class="header__list">
                 <li class="header__items"><a href="../auth/home">Home</a></li>
-                <li class="header__items"><a href="#">About</a></li>
+                <li class="header__items"><a href="../auth/home">About</a></li>
                 <li class="header__items"><a href="schedules">Exam Schedules</a></li>
                 <li class="header__items"><a href="../feedback/insert">Feedback</a></li>
             </ul>
@@ -386,14 +385,14 @@
             </div>
         </header>
 
-        <div class="sidebar sidebar-show">
+<!--        <div class="sidebar sidebar-show">
             <h2 class="sidebar__heading">Course</h2>
             <ul class="sidebar__list">
                 <c:forEach items="${list_course}" var="c">
-                    <li class="sidebar__items"><a href="schedulesCID?cid=${c.id}">${c.name}<i class="fa-solid fa-caret-right"></i></a></li>
+                    <li class="sidebar__items"><a href="schedules?cid=${c.id}">${c.name}<i class="fa-solid fa-caret-right"></i></a></li>
                         </c:forEach>
             </ul>
-        </div>
+        </div>-->
 
         <div class="section">
             <div class="section__search">

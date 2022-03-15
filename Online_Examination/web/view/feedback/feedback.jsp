@@ -130,12 +130,12 @@
             .header__dropdown a {
                 color: white;
             }
-            .header__dropdown-items:not(:last-child) {
+            .header__dropdown-items{
                 padding: 10px;
                 font-size: 1.4rem;
                 transition: 0.25s linear;
             }
-            .header__dropdown-items:not(:last-child):hover {
+            .header__dropdown-items:hover {
                 background-color: rgba(14, 181, 130, 0.9);
             }
 
@@ -285,13 +285,13 @@
         <header class="header">
             <div class="header__dashboard">
                 <i class="fa-solid fa-bars header__bar"></i>
-                <a href="../auth/dashboard" class="header__logo"><i class="fa-solid fa-graduation-cap"></i></i>ExamOnline</a>
+                <a href="../auth/dashboard" class="header__logo"><i class="fa-solid fa-graduation-cap"></i></i>Exam.</a>
             </div>
             <ul class="header__list">
                 <li class="header__items"><a href="../auth/home">Home</a></li>
-                <li class="header__items"><a href="../auth/homr">About</a></li>
+                <li class="header__items"><a href="../auth/home">About</a></li>
                 <li class="header__items"><a href="../exam/schedules">Exam Schedules</a></li>
-                <li class="header__items"><a href="feedback">Feedback</a></li>
+                <li class="header__items"><a href="insert">Feedback</a></li>
             </ul>
             <div class="header__account">
                 <c:if test="${sessionScope.account eq null}">
@@ -299,7 +299,7 @@
                             class="fa-solid fa-user header__account-icon"></i></a> 
                     </c:if>
                     <c:if test="${sessionScope.account ne null}">
-                    <span class="header__name">${sessionScope.account.full_name} <i onclick="show_dropdown()"
+                        <span class="header__name" style="margin-left: 120px">${sessionScope.account.full_name} <i onclick="show_dropdown()"
                                                                                     class="fa-solid fa-caret-down"></i></span>
                     </c:if>
                     <ul class="header__dropdown">

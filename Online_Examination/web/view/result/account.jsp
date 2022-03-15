@@ -444,6 +444,7 @@
                 function show_dropdown() {
                     document.querySelector('.header__dropdown').classList.toggle('droppdown-ishow');
                 }
+
                 function generateByCourse(div, pageIndex, maxPage, gap, cid) {
                     var container = document.getElementById(div);
                     //                    if (pageIndex - gap > 1)

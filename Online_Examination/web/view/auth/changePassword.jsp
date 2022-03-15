@@ -290,7 +290,7 @@
                                 class="fa-solid fa-user header__account-icon"></i></a> 
                         </c:if>
                         <c:if test="${sessionScope.account ne null}">
-                        <span class="header__name">${sessionScope.account.full_name}<i onclick="show_dropdown()"
+                            <span class="header__name" style="margin-left: 120px">${sessionScope.account.full_name}<i onclick="show_dropdown()"
                                                                                        class="fa-solid fa-caret-down"></i></span>
                         </c:if>
                     <ul class="header__dropdown">
@@ -311,7 +311,7 @@
                 </div>
                 <ul class="header__list">
                     <li class="header__items"><a href="home">Home</a></li>
-                    <li class="header__items"><a href="about">About</a></li>
+                    <li class="header__items"><a href="home">About</a></li>
                     <li class="header__items"><a href="../exam/schedules">Exam Schedules</a></li>
                     <li class="header__items"><a href="../feedback/insert">Feedback</a></li>
                 </ul>
